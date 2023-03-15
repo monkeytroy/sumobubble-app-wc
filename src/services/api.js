@@ -2,7 +2,8 @@
 let config = {};
 
 export const getConfig = async (customer) => {
-  const res = await fetch(`./${customer}.json`);
+  const baseURI = document.querySelector('#beacon-app-scriptastic').baseURI;
+  const res = await fetch(`${baseURI}${customer}.json`);
   const data = await res.json();
   config = data;
   return data;
