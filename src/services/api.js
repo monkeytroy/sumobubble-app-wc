@@ -3,12 +3,19 @@ let config = {};
 let serviceBase = '';
 
 export const getConfig = async (customer) => {
-  serviceBase = document.querySelector('#beacon-app-scriptastic').baseURI;
-  debugger;
-  const res = await fetch(`${serviceBase}${customer}.json`);
-  const data = await res.json();
-  config = data;
-  return data;
+  try {
+    const src = document.querySelector('#beacon-app-scriptastic')?.src;
+
+    serviceBase = src.split('/').slice(0, -1).join('/') + '/';
+
+    const res = await fetch(`${serviceBase}${customer}.json`);
+    const data = await res.json();
+    config = data;
+    return data;
+  } catch(err) {
+    console.error('Could not load the Beacon App script.  Check your config');
+    return null;
+  }
 }
 
 export const sendContact = async ({email, name, message, token}) => {
