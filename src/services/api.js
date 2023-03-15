@@ -2,7 +2,7 @@
 let config = {};
 
 export const getConfig = async (customer) => {
-  const res = await fetch(`/${customer}.json`);
+  const res = await fetch(`./${customer}.json`);
   const data = await res.json();
   config = data;
   return data;
