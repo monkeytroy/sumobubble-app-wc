@@ -1,9 +1,11 @@
 
 let config = {};
+let serviceBase = '';
 
 export const getConfig = async (customer) => {
-  const baseURI = document.querySelector('#beacon-app-scriptastic').baseURI;
-  const res = await fetch(`${baseURI}${customer}.json`);
+  serviceBase = document.querySelector('#beacon-app-scriptastic').baseURI;
+  debugger;
+  const res = await fetch(`${serviceBase}${customer}.json`);
   const data = await res.json();
   config = data;
   return data;
@@ -13,10 +15,10 @@ export const sendContact = async ({email, name, message, token}) => {
   
   const emailTo = config?.contact?.contact;
 
-  if (token && config?.beacon?.serviceUrl) {
+  if (token && serviceBase) {
 
     // call contact with token
-    const res = await fetch(config.beacon?.serviceUrl, {
+    const res = await fetch(`${serviceBase}/api/contact`, {
       method: 'POST',
       body: JSON.stringify({
         emailTo,
