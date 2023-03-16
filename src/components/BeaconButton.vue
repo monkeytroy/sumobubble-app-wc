@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute bottom-12 right-12">
+  <div class="fixed bottom-6 right-6 z-50">
 
     <button class="h-12 w-12 select-none
       flex items-center justify-center

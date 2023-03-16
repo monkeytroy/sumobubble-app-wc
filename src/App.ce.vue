@@ -1,6 +1,7 @@
 <template>
-    <BeaconButton :config="config" class="font-sans" 
-    :style="cssRootString"></BeaconButton>
+    <BeaconButton :config="config" class="font-sans text-left" 
+      :style="cssRootString">
+    </BeaconButton>
 </template>
 
 <script setup>
@@ -12,6 +13,9 @@
   const props = defineProps({
     customer: String,
   });
+
+  
+  // custom dynamic theme for TW
 
   const config = ref({});
   const cssRootString = ref('--color-primary: 200 200 250');

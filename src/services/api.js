@@ -2,6 +2,12 @@
 let config = {};
 let serviceBase = '';
 
+/**
+ * Read the config by getting the script path as the service base url.
+ * Use this for api calls inc getting the cust config.
+ * @param {} customer 
+ * @returns 
+ */
 export const getConfig = async (customer) => {
   try {
     
@@ -19,6 +25,11 @@ export const getConfig = async (customer) => {
   }
 }
 
+/**
+ * Send contact data
+ * @param {*} param0 
+ * @returns 
+ */
 export const sendContact = async ({email, name, message, token}) => {
   
   const emailTo = config?.contact?.contact;
