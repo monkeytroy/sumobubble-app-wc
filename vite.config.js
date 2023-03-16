@@ -5,7 +5,7 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'app',
+  base: '/app',
   plugins: [
     vue({
       template: {

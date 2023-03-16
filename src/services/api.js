@@ -14,11 +14,17 @@ export const getConfig = async (customer) => {
     const src = document.querySelector('#beacon-app-scriptastic')?.src;
     serviceBase = src.match(/http[s]?:\/\/.+?\//gm)[0];
 
-    const res = await fetch(`${serviceBase}app/${customer}.json`);
+    // load from local server in dev mode. 
+    if (import.meta.env?.MODE === 'development') {
+      serviceBase = 'http://localhost:3000/';
+    }
+
+    const res = await fetch(`${serviceBase}api/config/${customer}`);
     const data = await res.json();
     config = data;
 
     return data;
+
   } catch(err) {
     console.error('Could not load the Beacon App script.  Check your config.', err);
     return null;
