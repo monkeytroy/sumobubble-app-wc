@@ -1,15 +1,13 @@
 <template>
   <div class="fixed bottom-6 right-6 z-50">
+    <img src="../assets/i-icon.png" 
+      class="w-12 h-12 select-none
+      cursor-pointer shadow-md shadow-gray-200
+      hover:opacity-80 hover:shadow-md
+      hover:shadow-gray-400
+      bg-white rounded-full"
+      @click="onClick"/>
 
-    <button class="h-12 w-12 select-none
-      flex items-center justify-center
-      p-2 rounded-full
-      text-gray-900 bg-skin-primary hover:opacity-80"
-      @click="onClick" 
-      >
-      <span class="font-semibold text-2xl">B</span>
-    </button>
-  
     <div class="absolute -left-96 mr-4 bottom-0 z-10" 
       :class="open ? 'visible': 'hidden'">
       
