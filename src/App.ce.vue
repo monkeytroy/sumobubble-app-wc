@@ -1,5 +1,6 @@
 <template>
     <BeaconButton :config="config" class="font-sans text-left" 
+      v-if="config"
       :style="cssRootString">
     </BeaconButton>
 </template>
@@ -13,23 +14,23 @@
   const props = defineProps({
     customer: String,
   });
-
   
   // custom dynamic theme for TW
-
   const config = ref({});
   const cssRootString = ref('--color-primary: 200 200 250');
 
   const init = async () => {
     config.value = await getConfig(props.customer);
-    
-    const primaryColorConfig = config.value.customer?.theme?.primary;
-    if (primaryColorConfig) { 
-      const primaryColor = getRGBColor(primaryColorConfig, "primary");
-      const a11yColor = getRGBColor(getAccessibleColor(primaryColorConfig), "a11y");
 
-      cssRootString.value = `${primaryColor} ${a11yColor}`;
-    } 
+    if (config.value) {    
+      const primaryColorConfig = config.value.customer?.theme?.primary;
+      if (primaryColorConfig) { 
+        const primaryColor = getRGBColor(primaryColorConfig, "primary");
+        const a11yColor = getRGBColor(getAccessibleColor(primaryColorConfig), "a11y");
+
+        cssRootString.value = `${primaryColor} ${a11yColor}`;
+      } 
+    }
   }
 
   init();

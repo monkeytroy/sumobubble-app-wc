@@ -20,13 +20,17 @@ export const getConfig = async (customer) => {
     }
 
     const res = await fetch(`${serviceBase}api/config/${customer}`);
-    const data = await res.json();
-    config = data;
-
-    return data;
+    if (res.status === 200) {
+      const data = await res.json();
+      config = data;
+      return data;
+    } else {
+      console.error('Could not load the Beacon App. Check customer config.');
+      return null;
+    }
 
   } catch(err) {
-    console.error('Could not load the Beacon App script.  Check your config.', err);
+    console.error('Could not load the Beacon App.  Check customer config.', err);
     return null;
   }
 }
