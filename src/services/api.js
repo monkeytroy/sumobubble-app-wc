@@ -9,8 +9,9 @@ let serviceBase = '';
  * @returns 
  */
 export const getConfig = async (customer) => {
+
+  const FAIL = 'Could not load the Beacon App. Check customer config.';
   try {
-    
     const src = document.querySelector('#beacon-app-scriptastic')?.src;
     serviceBase = src.match(/http[s]?:\/\/.+?\//gm)[0];
 
@@ -24,15 +25,12 @@ export const getConfig = async (customer) => {
       const data = await res.json();
       config = data;
       return data;
-    } else {
-      console.error('Could not load the Beacon App. Check customer config.');
-      return null;
     }
-
-  } catch(err) {
-    console.error('Could not load the Beacon App.  Check customer config.', err);
-    return null;
+  } catch {
+    //
   }
+  console.error(FAIL);
+  return null;
 }
 
 /**
