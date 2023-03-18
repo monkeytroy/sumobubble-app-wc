@@ -16,7 +16,7 @@
   });
   
   // custom dynamic theme for TW
-  const config = ref({});
+  const config = ref();
   const cssRootString = ref('--color-primary: 200 200 250');
 
   const init = async () => {
