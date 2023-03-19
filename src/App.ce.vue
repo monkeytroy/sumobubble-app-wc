@@ -20,9 +20,11 @@
   const cssRootString = ref('--color-primary: 200 200 250');
 
   const init = async () => {
-    config.value = await getConfig(props.customer);
+    const res = await getConfig(props.customer);
 
-    if (config.value) {    
+    if (res.success && res.data) {
+      config.value = res.data;
+
       const primaryColorConfig = config.value.customer?.theme?.primary;
       if (primaryColorConfig) { 
         const primaryColor = getRGBColor(primaryColorConfig, "primary");
