@@ -30,6 +30,12 @@ module.exports = {
       //   '8xl': '96px',
       //   '9xl': '128px',
       // },
+      transitionDelay: {
+        '2000': '2000ms',
+        '4000': '4000ms',
+        '6000': '6000ms',
+        '8000': '8000ms',
+      },
       textColor: {
         skin: {
           primary: withOpacity("--color-primary"),
