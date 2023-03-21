@@ -1,10 +1,10 @@
 <template>
   <AccordianContent title="Contact">
-    <p class="text-gray-600 select-none">
+    <p class="text-gray-600 select-none text-xl">
       {{ content }}
     </p>
 
-    <form ref="contactFormRef" @submit.prevent="submitClick" class="mx-auto mt-4">
+    <form ref="contactFormRef" @submit.prevent="submitClick" class="mx-auto mt-4 text-xl">
       <div class="grid grid-cols-1 gap-y-2 gap-x-8 sm:grid-cols-2">
         <div class="col-span-2">
           <label for="full-name" 

@@ -1,7 +1,6 @@
 <template>
-  <AccordianContent title="Daily Verse" 
-    v-if="content">
-    <Markdown :source="content"></Markdown>
+  <AccordianContent title="Daily Verse" v-if="content">
+    <Markdown :source="content" class="text-xl"></Markdown>
   </AccordianContent>
 </template>
 

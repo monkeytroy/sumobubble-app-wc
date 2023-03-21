@@ -1,7 +1,7 @@
 <template>
   <AccordianContent title="Special Message" 
     v-if="content" default-open="true">
-    <Markdown :source="content"></Markdown>
+    <Markdown :source="content" class="text-lg"></Markdown>
   </AccordianContent>
 </template>
 

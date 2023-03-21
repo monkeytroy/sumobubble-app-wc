@@ -1,12 +1,14 @@
 <template>
   <!--<AccordianContent title="Welcome!" default-open="true">-->
-    <div class="flex-col space-y-4"
-      v-if="content">
+    <div class="flex-col space-y-4" v-if="content">
+      
       <div class="flex select-none" 
         :class="isLogoCenter ? 'justify-center': 'justify-start'">
         <img :src="config?.customer?.logo?.url" class="max-w-full max-h-24"/>
       </div>
-      <Markdown :source="content"></Markdown>
+
+      <Markdown :source="content" class="text-lg"></Markdown>
+      
       <div></div>
     </div>
   <!--</AccordianContent>-->

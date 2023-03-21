@@ -1,6 +1,11 @@
 <template>
   <AccordianContent title="Funny" v-if="funny" v-slot="{isContainerOpen}">
-    <div ref="listContainRef">
+
+    <div v-if="meme">
+      <img :src="meme"/>
+    </div>
+
+    <div ref="listContainRef" v-if="funny">
       <div v-if="isContainerOpen" 
         v-for="(value, index) in funny" :key="value" class="text-xl delay-0 delay-2000">
         <Markdown :source="value" 
@@ -20,11 +25,12 @@
   const props = defineProps(['config']);
 
   const funny = computed(() => {
-    let val = props.config?.funny?.content || '';
-    if (!val) { 
-      val = props.config?.funny?.daily || '';
-    }
-    return Array.isArray(val) ? val : [val];
+    const lines = props.config?.funny?.lines || '';
+    return Array.isArray(lines) ? lines : [lines];
+  });
+
+  const meme = computed(() => {
+    return props.config?.funny?.meme || '';
   });
 
   const listContainRef = ref(null);
