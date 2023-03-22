@@ -1,5 +1,5 @@
 <template>
-  <AccordianContent title="Funny" v-if="funny" v-slot="{isContainerOpen}">
+  <AccordianContent title="Funny" v-if="funny && config?.funny?.enabled" v-slot="{isContainerOpen}">
 
     <div v-if="meme">
       <img :src="meme"/>
@@ -48,11 +48,13 @@
   }
 
   onMounted(() => {
-    const observer = new MutationObserver(mute);
-    observer.observe(listContainRef.value, {
-      childList: true,
-      subtree: true 
-    });
+    if (listContainRef.value) {
+      const observer = new MutationObserver(mute);
+      observer.observe(listContainRef.value, {
+        childList: true,
+        subtree: true 
+      });
+    }
   });
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <AccordianContent title="Contact">
+  <AccordianContent title="Contact" v-if="config?.contact?.enabled">
     <p class="text-gray-600 select-none text-xl">
       {{ content }}
     </p>
