@@ -5,11 +5,12 @@
     </BeaconButton>
 </template>
 
-<script setup>
+<script lang="ts" setup>
   import { ref, defineProps } from 'vue';
   import BeaconButton from '@/components/BeaconButton.vue'
-  import { getConfig } from '@/services/api.js';
-  import { getRGBColor, getAccessibleColor } from '@/services/theme.js';
+  import { getConfig } from '@/services/api';
+  import { getRGBColor, getAccessibleColor } from '@/services/theme';
+  import { metricsInit, track } from '@/services/metrics';
 
   const props = defineProps({
     customer: String,
@@ -21,10 +22,15 @@
 
   const init = async () => {
     const res = await getConfig(props.customer);
-
     if (res.success && res.data) {
       config.value = res.data;
 
+      const customerId = config.value.customerId;
+      await metricsInit(customerId, config.value?.isDev);
+
+      track('Config Loaded');
+
+      // event log config loaded.
       const primaryColorConfig = config.value.customer?.theme?.primary;
       if (primaryColorConfig) { 
         const primaryColor = getRGBColor(primaryColorConfig, "primary");

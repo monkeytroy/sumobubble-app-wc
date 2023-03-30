@@ -29,7 +29,7 @@
         </div>
 
         <div class="p-2 grow rounded-b-3xl overflow-hidden flex flex-col">
-          <div class="overflow-y-auto p-2">
+          <div class="overflow-y-auto p-2" ref="scrollContainer">
             <ul role="list" class="space-y-2">
               <li class="relative">
                 <SummaryPanel :config="config"></SummaryPanel>
@@ -37,16 +37,16 @@
               <li class="relative">
                 <SpecialPanel :config="config"></SpecialPanel>
               </li>
-              <li class="relative">
+              <li class="relative" ref="contactPanelRef">
                 <ContactPanel :config="config"></ContactPanel>
               </li>
-              <li class="relative">
+              <li class="relative" ref="versePanelRef">
                 <VersePanel :config="config"></VersePanel>
               </li>
-              <li class="relative">
-                <VodPanel :config="config"></VodPanel>
+              <li class="relative" ref="spotlightPanelRef">
+                <SpotlightPanel :config="config"></SpotlightPanel>
               </li>
-              <li class="relative">
+              <li class="relative" ref="funnyPanelRef">
                 <FunnyPanel :config="config"></FunnyPanel>
               </li>
             </ul>
@@ -57,22 +57,44 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
-  import { ref, defineProps } from 'vue';
-  import SummaryPanel from './SummaryPanel.vue';
-  import SpecialPanel from './SpecialPanel.vue';
-  import ContactPanel from './ContactPanel.vue';
-  import VersePanel from './VersePanel.vue';
-  import VodPanel from './VodPanel.vue';
-  import FunnyPanel from './FunnyPanel.vue';
+  import { ref, defineProps, provide } from 'vue';
+  import SummaryPanel from '@/components/SummaryPanel.vue';
+  import SpecialPanel from '@/components/SpecialPanel.vue';
+  import ContactPanel from '@/components/ContactPanel.vue';
+  import VersePanel from '@/components/VersePanel.vue';
+  import SpotlightPanel from '@/components/SpotlightPanel.vue';
+  import FunnyPanel from '@/components/FunnyPanel.vue';
   import { XCircleIcon } from '@heroicons/vue/20/solid';
+  import { track } from '@/services/metrics';
 
-  const props = defineProps(['config']);
+  defineProps(['config']);
 
   const open = ref(false);
 
+  const scrollContainer = ref(null);
+
+  const contactPanelRef = ref(null);
+  const versePanelRef = ref(null);
+  const spotlightPanelRef = ref(null);
+  const funnyPanelRef = ref(null);
+
+  const panelRefs = {
+    scrollContainer,
+    contactPanelRef,
+    versePanelRef,
+    spotlightPanelRef,
+    funnyPanelRef
+  }
+
+  provide('panelRefs', panelRefs);
+
   const onClick = () => {
+    
+    // event track
+    track('Beacon Opened');
+
     open.value = !open.value;
   }
 

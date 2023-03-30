@@ -2,7 +2,7 @@
   <div v-html="markdownAsHtml"></div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
   import { defineProps, computed } from 'vue';
   import marked from 'markdown-it';
