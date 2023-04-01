@@ -21,7 +21,7 @@
           bg-skin-primary bg-opacity-40
           text-2xl font-bold select-none">
           <div class="flex justify-between items-center uppercase p-4 text-gray-800">
-            {{ config?.customer?.title }}
+            {{ config?.customer?.title || 'Hello there'}}
             <XCircleIcon class="w-6 h-6 cursor-pointer hover:text-gray-600" 
               @click="close">
             </XCircleIcon>
@@ -69,7 +69,7 @@
   import { XCircleIcon } from '@heroicons/vue/20/solid';
   import { track } from '@/services/metrics';
 
-  defineProps(['config']);
+  const props = defineProps(['config']);
 
   const open = ref(false);
 
@@ -89,6 +89,8 @@
   }
 
   provide('panelRefs', panelRefs);
+
+  console.log(props.config);
 
   const onClick = () => {
     

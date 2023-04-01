@@ -1,8 +1,7 @@
 <template>
   <div>
     <AccordianContent title="Contact" 
-      v-if="config?.contact?.enabled" 
-      :config="config" scrollItem="contactPanelRef">
+      v-if="config?.sections?.contact?.enabled" :config="config" scrollItem="contactPanelRef">
       <p class="text-gray-600 select-none text-xl">
         {{ content }}
       </p>
@@ -98,7 +97,7 @@
 
   const CAPTCHA_KEY = '6LdHNPIkAAAAAHi7HsTDq-RFRKGFMwt6ZOWSFEGn';
   const props = defineProps(['config']);
-  const content = computed(() => props.config?.contact?.content || '');
+  const content = computed(() => props.config?.sections?.contact?.content || '');
 
   const nameInput = ref();
   const emailInput = ref();

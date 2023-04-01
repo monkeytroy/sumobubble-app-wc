@@ -13,6 +13,6 @@
   import Markdown from '@/components/Markdown.vue';
   
   const props = defineProps(['config', 'scrollContainer']);
-  const content = computed(() => props.config?.special?.content || '');
+  const content = computed(() => props.config?.summary?.special || '');
 
 </script>

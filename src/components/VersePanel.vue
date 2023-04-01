@@ -1,11 +1,13 @@
 <template>
-  <AccordianContent title="Daily Verse" 
-    v-if="config?.verse?.enabled" 
-    :config="config" scrollItem="versePanelRef">
-    <div v-if="config.verse.verseRef" class="text-xl font-bold text-gray-800">{{ config.verse.verseRef }}</div>
-    <Markdown :source="content" class="text-xl text-gray-800"></Markdown>
-    <div v-if="config.verse.copyright" 
-      class="text-xs text-gray-500 my-2">{{ config.verse.copyright }}</div>
+  <AccordianContent title="Daily Verse" v-if="verse.enabled" :config="config" scrollItem="versePanelRef">
+
+    <div v-if="verse.props.verseRef" class="text-xl font-bold text-gray-800">{{ verse.props.verseRef }}</div>
+
+    <Markdown :source="verse.content || ''" class="text-xl text-gray-800"></Markdown>
+
+    <div v-if="verse.props?.copyright" 
+      class="text-xs text-gray-500 my-2">{{ verse.props?.copyright }}</div>
+      
   </AccordianContent>
 </template>
 
@@ -17,6 +19,6 @@
   
   const props = defineProps(['config']);
 
-  const content = computed(() => props?.config?.verse?.content || '');
+  const verse = computed(() => props?.config?.sections?.verse || {});
 
 </script>
