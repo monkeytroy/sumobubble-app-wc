@@ -9,17 +9,16 @@
         @click="onClick"/>
     </div>
     <div class="fixed bottom-6 right-0 sm:right-0 z-50
-        max-w-full sm:max-w-md w-full
-        " 
-      style="max-height: 90vh !important"
+        max-w-full sm:max-w-md w-full" 
       :class="open ? 'visible': 'hidden'"
       >
       <div class="rounded-3xl bg-white mx-4
         text-sm ring-1 ring-gray-900/5 flex flex-col
-        shadow-md">
+        shadow-md"
+        style="max-height: 90vh !important">
 
         <div class="rounded-t-3xl 
-          bg-skin-primary bg-opacity-40
+          bg-skin-primary bg-opacity-40 h-full
           text-2xl font-bold select-none">
           <div class="flex justify-between items-center uppercase p-4 text-gray-800">
             {{ config?.customer?.title || 'Hello there'}}
