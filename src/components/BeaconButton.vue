@@ -91,8 +91,6 @@
 
   provide('panelRefs', panelRefs);
 
-  console.log(props.config);
-
   const onClick = () => {
     
     // event track
