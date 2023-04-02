@@ -8,14 +8,15 @@
         bg-white rounded-full"
         @click="onClick"/>
     </div>
-    <div class="fixed bottom-6 right-0 mx-4 sm:right-2 z-50 
-      max-w-full sm:max-w-md" 
-      :class="open ? 'visible': 'hidden'">
-      
-      <div class="rounded-3xl bg-white
+    <div class="fixed bottom-6 right-0 sm:right-0 z-50
+        max-w-full sm:max-w-md w-full
+        " 
+      style="max-height: 90vh !important"
+      :class="open ? 'visible': 'hidden'"
+      >
+      <div class="rounded-3xl bg-white mx-4
         text-sm ring-1 ring-gray-900/5 flex flex-col
-        shadow-md"
-        style="max-height: 90vh !important">
+        shadow-md">
 
         <div class="rounded-t-3xl 
           bg-skin-primary bg-opacity-40
