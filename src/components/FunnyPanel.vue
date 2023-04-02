@@ -1,15 +1,14 @@
 <template>
   <AccordianContent title="Funny" 
-    v-if="funny?.enabled" 
+    v-if="funny?.enabled && lines" 
     v-slot="{isContainerOpen}"
     :config="config" scrollItem="funnyPanelRef">
     <div>
-
       <div v-for="(value, index) in funny.urls">
         <img :key="index" :src="value"/>
       </div>
 
-      <div v-if="funny.content && isContainerOpen">
+      <div v-if="lines.length > 0 && isContainerOpen">
         <div ref="listContainRef">
           <div v-for="(value, index) in lines" :key="value" class="text-xl delay-0 delay-2000 delay-4000 delay-6000 delay-8000">
             <Markdown :source="value" 
@@ -36,8 +35,12 @@
   });
 
   const lines = computed(() => {
-    const content: string = funny.value.content;
-    return content.split('\n');
+    if (funny.value.content) {
+      const content: string = funny.value.content;
+      return content.split('\n');
+    } else {
+      return null;
+    }
   })
 
   const listContainRef = ref(null);
