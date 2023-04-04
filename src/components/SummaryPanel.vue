@@ -1,12 +1,15 @@
 <template>
-  <div class="flex-col space-y-4" v-if="content">
+  <div class="flex-col" v-if="content">
     
-    <div class="flex select-none" 
+    <div class="flex select-none mb-4" 
       :class="isLogoCenter ? 'justify-center': 'justify-start'">
       <img :src="config?.customer?.logo?.url" class="max-w-full max-h-24"/>
     </div>
 
-    <Markdown :source="content" class="text-lg"></Markdown>
+    <div v-for="(val, idx) in content">
+      <div v-if="val === ''">&nbsp;</div>
+      <Markdown :source="val" class="text-lg"></Markdown>
+    </div>
     
     <div></div>
   </div>
@@ -19,7 +22,7 @@
 
   const props = defineProps(['config']);
   
-  const content = computed(() => props.config?.summary?.content || '');
+  const content = computed(() => props.config?.summary?.content.split('\n') || '');
 
   const isLogoCenter = computed( e => props.config?.customer?.logo?.align == 'center');
 
