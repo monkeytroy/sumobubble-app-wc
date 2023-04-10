@@ -48,3 +48,6 @@
 <style>
   @import '@/css/index.css';
 </style>
+<style lang="scss">
+  @import '@/css/summary.scss';
+</style>

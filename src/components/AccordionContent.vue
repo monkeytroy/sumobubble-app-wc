@@ -15,7 +15,7 @@
           />
       </DisclosureButton>
       <div v-show="open">
-        <DisclosurePanel static className="px-4 pt-4 pb-2 text-sm text-gray-500">
+        <DisclosurePanel static className="px-4 pt-4 pb-2 text-sm">
           <div ref="contentRef">
             <slot :isContainerOpen="isOpen"></slot>
           </div>

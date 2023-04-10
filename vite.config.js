@@ -14,7 +14,7 @@ export default defineConfig({
         }
       }
     }),
-    cssInjectedByJsPlugin({topExecutionPriority: false})
+    cssInjectedByJsPlugin({topExecutionPriority: false}),
   ],
   build: {
     lib: {
@@ -31,5 +31,5 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
-  },
+  }
 })

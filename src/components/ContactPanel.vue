@@ -2,11 +2,12 @@
   <div>
     <AccordianContent title="Contact" 
       v-if="config?.sections?.contact?.enabled" :config="config" scrollItem="contactPanelRef">
-      <p class="text-gray-600 select-none text-xl">
+
+      <p v-if="content" class="text-gray-600 select-none text-xl mb-3">
         {{ content }}
       </p>
 
-      <form ref="contactFormRef" @submit.prevent="submitClick" class="mx-auto mt-4 text-xl">
+      <form ref="contactFormRef" @submit.prevent="submitClick" class="mx-auto text-xl">
         <div class="grid grid-cols-1 gap-y-2 gap-x-8 sm:grid-cols-2">
           <div class="col-span-2">
             <label for="full-name" 

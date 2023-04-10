@@ -1,6 +1,6 @@
 <template>
   <AccordianContent title="Funny" 
-    v-if="funny?.enabled && lines" 
+    v-if="funny?.enabled && ((lines && lines[0]) || (funny.urls && funny.urls[0]))" 
     v-slot="{isContainerOpen}"
     :config="config" scrollItem="funnyPanelRef">
     <div>
@@ -8,7 +8,7 @@
         <img :key="index" :src="value"/>
       </div>
 
-      <div v-if="lines.length > 0 && isContainerOpen">
+      <div v-if="lines?.length > 0 && isContainerOpen">
         <div ref="listContainRef">
           <div v-for="(value, index) in lines" :key="value" class="text-xl delay-0 delay-2000 delay-4000 delay-6000 delay-8000">
             <Markdown :source="value" 
@@ -39,7 +39,7 @@
       const content: string = funny.value.content;
       return content.split('\n');
     } else {
-      return null;
+      return [];
     }
   })
 
@@ -56,7 +56,7 @@
   const mute = () => {
     transClasses.value = [];
     let newTransClasses: string[] = [];
-    const len = lines.value?.length;
+    const len = lines.value?.length || 0;
     for (let i = 0; i < len; i++) {
       newTransClasses.push(`opacity-100 delay-${i == 0 || len > 6 ? '0' : '' + i * 2000}`);
     }

@@ -1,4 +1,5 @@
 declare module "markdown-it-sup";
+declare module "vue-html-secure";
 
 interface Window {
   grecaptcha: any;
