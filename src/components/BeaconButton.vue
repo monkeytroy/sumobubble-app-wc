@@ -8,7 +8,7 @@
         bg-white rounded-full"
         @click="onClick"/>
     </div>
-    <div class="fixed bottom-6 right-0 sm:right-0 z-50
+    <div class="fixed bottom-6 right-0 sm:right-0 z-999
         max-w-full sm:max-w-md w-full" 
       :class="open ? 'visible': 'hidden'"
       >
