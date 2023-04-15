@@ -22,9 +22,9 @@ export const getConfig = async (customer) => {
 
     const res = await fetch(`${serviceBase}api/config/${customer}`);
     if (res.status === 200) {
-      const data = await res.json();
-      config = data;
-      return data;
+      const resJson = await res.json();
+      config = resJson.data;
+      return resJson;
     }
   } catch {
     //
@@ -38,17 +38,16 @@ export const getConfig = async (customer) => {
  * @param {*} param0 
  * @returns 
  */
-export const sendContact = async ({email, name, message, token}) => {
+export const sendContact = async ({section, email, category, name, message, token}) => {
   
-  const emailTo = config?.contact?.contact;
-
   if (token && serviceBase) {
 
     // call contact with token
-    const res = await fetch(`${serviceBase}api/contact`, {
+    const res = await fetch(`${serviceBase}api/contact/${config.customerId}`, {
       method: 'POST',
       body: JSON.stringify({
-        emailTo,
+        section,
+        category,
         email,
         name,
         message, 

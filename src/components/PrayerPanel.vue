@@ -1,13 +1,13 @@
 <template>
   <div>
-    <AccordianContent title="Contact" 
-      v-if="config?.sections?.contact?.enabled" :config="config" scrollItem="contactPanelRef">
+    <AccordianContent title="Prayer Request" 
+      v-if="config?.sections?.prayer?.enabled" :config="config" scrollItem="prayerPanelRef">
 
       <p v-if="content" class="text-gray-600 select-none text-xl mb-3">
         {{ content }}
       </p>
 
-      <form ref="contactFormRef" @submit.prevent="submitClick" class="mx-auto text-xl">
+      <form ref="prayerFormRef" @submit.prevent="submitClick" class="mx-auto text-xl">
         <div class="grid grid-cols-1 gap-y-2 gap-x-8 sm:grid-cols-2">
           <div class="col-span-2">
             <label for="full-name" 
@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="col-span-2">
-            <label for="message" class="block text-sm font-semibold leading-6 text-gray-900 select-none">Message</label>
+            <label for="message" class="block text-sm font-semibold leading-6 text-gray-900 select-none">Prayer Request</label>
             <div class="mt-1">
               <textarea name="message" id="message" rows="3" minlength="4" 
                 ref="messageInputRef" v-model="messageInput" required
@@ -53,6 +53,11 @@
                   invalid:text-red-600"/>
             </div>
           </div>
+
+          <PrayerContentCatSelect :categories="categories" @selected-cateogry="onSelectedCategory"
+            v-if="categories.length > 1">
+          </PrayerContentCatSelect>
+
         </div>
         <div class="mt-4">
           <div class="mb-4 bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3" role="alert"
@@ -95,19 +100,42 @@
   import { ref, defineProps, computed, onMounted } from 'vue';
   import { sendContact } from '@/services/api';
   import AccordianContent from '@/components/AccordionContent.vue';
+  import PrayerContentCatSelect from './CatSelect.vue';
+
+  interface IContactCategory {
+    title: string,
+    email: string
+  }
 
   const CAPTCHA_KEY = '6LdHNPIkAAAAAHi7HsTDq-RFRKGFMwt6ZOWSFEGn';
   const props = defineProps(['config']);
-  const content = computed(() => props.config?.sections?.contact?.content || '');
+  const content = computed(() => props.config?.sections?.prayer?.content || '');
+
+  const categories = computed(() => {
+    
+    const cats: Array<IContactCategory> = props.config?.sections?.prayer?.props?.categories || [];
+    return [
+      {
+        title: 'Default',
+        email: props.config?.sections?.prayer?.props?.email
+      },
+      ...cats
+    ]
+  });
 
   const nameInput = ref();
   const emailInput = ref();
   const messageInput = ref();
-  const contactFormRef = ref();
+  const prayerFormRef = ref();
   const messageInputRef = ref();
   const submitSuccess = ref(false);
   const submitFail = ref(false);
-  
+  const selectedCategory = ref('');
+
+  const onSelectedCategory = (cat: string) => {
+    selectedCategory.value = cat;
+  }
+
   /**
    * Load the recaptcha script and insert it in doc
    */
@@ -133,8 +161,8 @@
     submitFail.value = false;
 
     const success = await sendContact({
-      section: 'contact',
-      category: null,
+      section: 'prayer',
+      category: selectedCategory.value,
       email: emailInput.value,
       name: nameInput.value,      
       message: messageInput.value,
@@ -146,7 +174,7 @@
       emailInput.value = '';
       nameInput.value = '';
       messageInput.value = '';
-      contactFormRef.value.reset();
+      prayerFormRef.value.reset();
 
       setTimeout(() => {
         submitSuccess.value = false;

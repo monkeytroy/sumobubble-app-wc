@@ -38,7 +38,10 @@
                 <SpecialPanel :config="config"></SpecialPanel>
               </li>
               <li class="relative" ref="contactPanelRef">
-                <ContactPanel :config="config"></ContactPanel>
+                <ContactPanel :config="config" ></ContactPanel>
+              </li>
+              <li class="relative" ref="prayerPanelRef">
+                <PrayerPanel :config="config"></PrayerPanel>
               </li>
               <li class="relative" ref="versePanelRef">
                 <VersePanel :config="config"></VersePanel>
@@ -63,6 +66,7 @@
   import SummaryPanel from '@/components/SummaryPanel.vue';
   import SpecialPanel from '@/components/SpecialPanel.vue';
   import ContactPanel from '@/components/ContactPanel.vue';
+  import PrayerPanel from '@/components/PrayerPanel.vue';
   import VersePanel from '@/components/VersePanel.vue';
   import SpotlightPanel from '@/components/SpotlightPanel.vue';
   import FunnyPanel from '@/components/FunnyPanel.vue';
@@ -74,20 +78,26 @@
   const open = ref(false);
 
   const scrollContainer = ref(null);
+  const openedSection = ref('');
 
   const contactPanelRef = ref(null);
   const versePanelRef = ref(null);
   const spotlightPanelRef = ref(null);
   const funnyPanelRef = ref(null);
+  const prayerPanelRef = ref(null);
 
   const panelRefs = {
     scrollContainer,
     contactPanelRef,
     versePanelRef,
     spotlightPanelRef,
-    funnyPanelRef
+    funnyPanelRef,
+    prayerPanelRef
   }
 
+  provide('openedSection', openedSection);
+  
+  // provide to accordion container for scrolling. 
   provide('panelRefs', panelRefs);
 
   const onClick = () => {
