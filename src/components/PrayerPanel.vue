@@ -116,7 +116,7 @@
     const cats: Array<IContactCategory> = props.config?.sections?.prayer?.props?.categories || [];
     return [
       {
-        title: 'Default',
+        title: 'General',
         email: props.config?.sections?.prayer?.props?.email
       },
       ...cats

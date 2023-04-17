@@ -16,6 +16,7 @@
               <input type="text" name="first-name" id="first-name"
                 autocomplete="given-name" 
                 ref="nameInputRef" v-model="nameInput" required
+                placeholder="Smith"
                 class="block w-full py-1.5 px-3.5  
                   text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6
                   rounded-md border border-slate-300
@@ -30,6 +31,22 @@
             <div class="mt-1">
               <input type="email" name="email" id="email" autocomplete="email" 
                 ref="emailInputRef" v-model="emailInput" required
+                placeholder="someone@somewhere.com"
+                class="block w-full py-1.5 px-3.5  
+                  text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6
+                  rounded-md border border-slate-300
+                  focus:outline-none focus:border-skin-primary
+                  focus:ring-1 focus:ring-skin-primary focus:ring-opacity-50
+                  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                  invalid:text-red-600" />
+            </div>
+          </div>
+          <div class="col-span-2">
+            <label for="phone" class="block text-sm font-semibold leading-6 text-gray-900 select-none">Phone</label>
+            <div class="mt-1">
+              <input type="tel" name="phone" id="phone" autocomplete="tel" 
+                ref="phoneInputRef" v-model="phoneInput" required pattern="^\+?(\d{1})?[- ]?\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$"
+                placeholder="xxx-xxx-xxxx"
                 class="block w-full py-1.5 px-3.5  
                   text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6
                   rounded-md border border-slate-300
@@ -51,6 +68,19 @@
                   focus:ring-1 focus:ring-skin-primary focus:ring-opacity-50
                   disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                   invalid:text-red-600"/>
+            </div>
+          </div>
+          <div class="col-span-2 flex">
+            <div class="flex h-6 items-center">
+              <input id="moreInfo" aria-describedby="i-want-more-information" 
+                name="moreInfo" type="checkbox" 
+                ref="moreInfoInputRef" v-model="moreInfoInput"
+                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+            </div>
+            <div class="ml-3 text-sm leading-6">
+              <span id="candidates-description" class="text-gray-500">
+                <span class="sr-only">Yes!</span>Please send me updates and information!
+              </span>
             </div>
           </div>
         </div>
@@ -102,8 +132,11 @@
 
   const nameInput = ref();
   const emailInput = ref();
+  const phoneInput = ref();
+  const moreInfoInput = ref(true);
   const messageInput = ref();
   const contactFormRef = ref();
+  const moreInfoInputRef = ref();
   const messageInputRef = ref();
   const submitSuccess = ref(false);
   const submitFail = ref(false);
@@ -134,17 +167,23 @@
 
     const success = await sendContact({
       section: 'contact',
-      category: null,
-      email: emailInput.value,
-      name: nameInput.value,      
-      message: messageInput.value,
-      token
+      token,
+      contactInfo: {
+        category: null,
+        email: emailInput.value,
+        name: nameInput.value,  
+        phone: phoneInput.value,
+        moreInfo: moreInfoInput.value,    
+        message: messageInput.value
+      }
     });
 
     if (success) {
       submitSuccess.value = true;
       emailInput.value = '';
       nameInput.value = '';
+      phoneInput.value = '';
+      moreInfoInput.value = true;
       messageInput.value = '';
       contactFormRef.value.reset();
 

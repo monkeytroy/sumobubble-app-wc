@@ -38,21 +38,20 @@ export const getConfig = async (customer) => {
  * @param {*} param0 
  * @returns 
  */
-export const sendContact = async ({section, email, category, name, message, token}) => {
+export const sendContact = async ({section, token, contactInfo}) => {
   
   if (token && serviceBase) {
 
+    const formbody = {
+      section, 
+      token,
+      ...contactInfo
+    }
+    
     // call contact with token
     const res = await fetch(`${serviceBase}api/contact/${config.customerId}`, {
       method: 'POST',
-      body: JSON.stringify({
-        section,
-        category,
-        email,
-        name,
-        message, 
-        token
-      })
+      body: JSON.stringify(formbody)
     });
 
     return (res.status == 200);
