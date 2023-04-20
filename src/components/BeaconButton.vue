@@ -8,14 +8,12 @@
         bg-white rounded-full"
         @click="onClick"/>
     </div>
-    <div class="fixed bottom-6 right-0 sm:right-0 z-999
-        max-w-full sm:max-w-md w-full" 
-      :class="open ? 'visible': 'hidden'"
-      >
+    <div class="fixed bottom-6 right-0 sm:right-0 z-999 max-w-full sm:max-w-md w-full" 
+      :class="open ? 'visible': 'hidden'">
+
       <div class="rounded-3xl bg-white mx-4
-        text-sm ring-1 ring-gray-900/5 flex flex-col
-        shadow-md"
-        style="max-height: 90vh !important">
+        text-sm ring-1 ring-gray-900/5 flex flex-col shadow-md"
+        style="max-height: 90vh !important; min-height: 300px !important;">
 
         <div class="rounded-t-3xl 
           bg-skin-primary bg-opacity-40 h-full
@@ -30,31 +28,64 @@
 
         <div class="p-2 grow rounded-b-3xl overflow-hidden flex flex-col">
           <div class="overflow-y-auto p-2" ref="scrollContainer">
-            <ul role="list" class="space-y-2">
-              <li class="relative">
-                <SummaryPanel :config="config"></SummaryPanel>
-              </li>
-              <li class="relative">
-                <SpecialPanel :config="config"></SpecialPanel>
-              </li>
-              <li class="relative" ref="contactPanelRef">
-                <ContactPanel :config="config" ></ContactPanel>
-              </li>
-              <li class="relative" ref="prayerPanelRef">
-                <PrayerPanel :config="config"></PrayerPanel>
-              </li>
-              <li class="relative" ref="versePanelRef">
-                <VersePanel :config="config"></VersePanel>
-              </li>
-              <li class="relative" ref="spotlightPanelRef">
-                <SpotlightPanel :config="config"></SpotlightPanel>
-              </li>
-              <li class="relative" ref="funnyPanelRef">
-                <FunnyPanel :config="config"></FunnyPanel>
-              </li>
-            </ul>
+
+            <div v-if="page=='home'" class="flex flex-col gap-4">
+              <SummaryPanel :config="config"></SummaryPanel>
+              <SpecialPanel :config="config"></SpecialPanel>             
+            </div>
+
+            <div v-else class="flex flex-col ">           
+
+              <ContactPanel :config="config" :showing="page=='contact'"></ContactPanel>
+                
+              <PrayerPanel :config="config" :showing="page=='prayer'"></PrayerPanel>
+              
+              <VersePanel :config="config" :showing="page=='verse'"></VersePanel>
+              
+              <SpotlightPanel :config="config" :showing="page=='spotlight'"></SpotlightPanel>
+              
+              <FunnyPanel :config="config" :showing="page=='funny'"></FunnyPanel>
+
+            </div>
           </div>
         </div>
+
+        <div class="rounded-b-3xl bg-skin-primary bg-opacity-40 h-full
+          text-sm font-semibold select-none">
+          <div class="flex items-center uppercase p-4 text-gray-800 cursor-pointer">
+
+            <div v-if="page != 'home'" class="flex items-center hover:underline"
+              @click="page = 'home'">
+              <ChevronLeftIcon class="w-6 h-6"></ChevronLeftIcon>
+              Back
+            </div>
+
+            <div v-else class="flex flex-wrap gap-4 select-none">
+              <div class="cursor-pointer hover:underline" 
+                v-if="config?.sections?.contact?.enabled"
+                @click="page='contact'">Contact
+              </div>
+              <div class="cursor-pointer hover:underline" 
+                v-if="config?.sections?.prayer?.enabled"
+                @click="page='prayer'">Prayer
+              </div>
+              <div class="cursor-pointer hover:underline" 
+                v-if="config?.sections?.verse?.enabled"
+                @click="page='verse'">Daily Verse
+              </div>
+              <div class="cursor-pointer hover:underline" 
+                v-if="config?.sections?.spotlight?.enabled"
+                @click="page='spotlight'">Video Spotlight
+              </div>
+              <div class="cursor-pointer hover:underline" 
+                v-if="config?.sections?.funny?.enabled"
+                @click="page='funny'">Funny
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -70,12 +101,14 @@
   import VersePanel from '@/components/VersePanel.vue';
   import SpotlightPanel from '@/components/SpotlightPanel.vue';
   import FunnyPanel from '@/components/FunnyPanel.vue';
-  import { XCircleIcon } from '@heroicons/vue/20/solid';
+  import { ChevronLeftIcon, XCircleIcon } from '@heroicons/vue/20/solid';
   import { track } from '@/services/metrics';
 
   const props = defineProps(['config']);
 
   const open = ref(false);
+
+  const page = ref('home');
 
   const scrollContainer = ref(null);
   const openedSection = ref('');

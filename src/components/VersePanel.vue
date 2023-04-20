@@ -1,5 +1,5 @@
 <template>
-  <AccordianContent title="Daily Verse" v-if="verse.enabled" :config="config" scrollItem="versePanelRef">
+  <div v-if="showing">
 
     <div v-if="verse.props.verseRef" class="text-xl font-bold text-gray-800 flex gap-2 items-center relative">
       {{ verse.props.verseRef }}
@@ -19,16 +19,15 @@
 
     <Markdown :source="verse.content || ''" class="text-xl text-gray-800"></Markdown>
       
-  </AccordianContent>
+  </div>
 </template>
 
 <script lang="ts" setup>
 
   import { computed, defineProps, ref } from 'vue';
-  import AccordianContent from '@/components//AccordionContent.vue';
   import Markdown from '@/components/Markdown.vue';
   
-  const props = defineProps(['config']);
+  const props = defineProps(['config', 'showing']);
   const showCopyright = ref(false);
 
   const verse = computed(() => props?.config?.sections?.verse || {});
