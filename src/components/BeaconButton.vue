@@ -13,7 +13,7 @@
 
       <div class="rounded-3xl bg-white mx-4
         text-sm ring-1 ring-gray-900/5 flex flex-col shadow-md"
-        style="max-height: 90vh !important; min-height: 300px !important;">
+        style="max-height: 90vh !important; min-height: 400px !important;">
 
         <div class="rounded-t-3xl 
           bg-skin-primary bg-opacity-40 h-full
@@ -27,14 +27,15 @@
         </div>
 
         <div class="p-2 grow rounded-b-3xl overflow-hidden flex flex-col">
-          <div class="overflow-y-auto p-2" ref="scrollContainer">
+
+          <div class="overflow-y-auto p-2 grow" ref="scrollContainer">
 
             <div v-if="page=='home'" class="flex flex-col gap-4">
               <SummaryPanel :config="config"></SummaryPanel>
               <SpecialPanel :config="config"></SpecialPanel>             
             </div>
 
-            <div v-else class="flex flex-col ">           
+            <div v-else class="flex flex-col">
 
               <ContactPanel :config="config" :showing="page=='contact'"></ContactPanel>
                 
@@ -48,6 +49,7 @@
 
             </div>
           </div>
+
         </div>
 
         <div class="rounded-b-3xl bg-skin-primary bg-opacity-40 h-full
