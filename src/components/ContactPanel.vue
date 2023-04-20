@@ -70,19 +70,21 @@
                   invalid:text-red-600"/>
             </div>
           </div>
-          <div class="col-span-2 flex">
-            <div class="flex h-6 items-center">
-              <input id="moreInfo" aria-describedby="i-want-more-information" 
-                name="moreInfo" type="checkbox" 
-                ref="moreInfoInputRef" v-model="moreInfoInput"
-                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+          <!--
+            <div class="col-span-2 flex">
+              <div class="flex h-6 items-center">
+                <input id="moreInfo" aria-describedby="i-want-more-information" 
+                  name="moreInfo" type="checkbox" 
+                  ref="moreInfoInputRef" v-model="moreInfoInput"
+                  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+              </div>
+              <div class="ml-3 text-sm leading-6">
+                <span id="candidates-description" class="text-gray-500">
+                  <span class="sr-only">Yes!</span>Please send me updates and information!
+                </span>
+              </div>
             </div>
-            <div class="ml-3 text-sm leading-6">
-              <span id="candidates-description" class="text-gray-500">
-                <span class="sr-only">Yes!</span>Please send me updates and information!
-              </span>
-            </div>
-          </div>
+          -->
         </div>
         <div class="mt-4">
           <div class="mb-4 bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3" role="alert"
@@ -133,10 +135,10 @@
   const nameInput = ref();
   const emailInput = ref();
   const phoneInput = ref();
-  const moreInfoInput = ref(true);
+  //const moreInfoInput = ref(true);
   const messageInput = ref();
   const contactFormRef = ref();
-  const moreInfoInputRef = ref();
+  //const moreInfoInputRef = ref();
   const messageInputRef = ref();
   const submitSuccess = ref(false);
   const submitFail = ref(false);
@@ -173,7 +175,7 @@
         email: emailInput.value,
         name: nameInput.value,  
         phone: phoneInput.value,
-        moreInfo: moreInfoInput.value,    
+        //moreInfo: moreInfoInput.value,    
         message: messageInput.value
       }
     });
@@ -183,7 +185,7 @@
       emailInput.value = '';
       nameInput.value = '';
       phoneInput.value = '';
-      moreInfoInput.value = true;
+      //moreInfoInput.value = true;
       messageInput.value = '';
       contactFormRef.value.reset();
 
