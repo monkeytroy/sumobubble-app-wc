@@ -1,6 +1,6 @@
 <template>
   <div class="group cursor-pointer 
-    hover:underline hover:text-skin-primary
+    hover:underline hover:text-skin-primary drop-shadow-md hover:brightness-75
       flex flex-col gap-0 items-center text-gray-500" 
       @click="emit('click')">
 

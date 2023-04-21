@@ -81,6 +81,7 @@ module.exports = {
       textColor: {
         skin: {
           primary: withOpacity("--color-primary"),
+          darker: withOpacity("--primary"),
           a11y: withOpacity("--color-a11y"),
         },
       },

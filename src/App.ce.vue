@@ -6,6 +6,7 @@
 </template>
 
 <script lang="ts" setup>
+
   import { ref, defineProps } from 'vue';
   import BeaconButton from '@/components/BeaconButton.vue'
   import { getConfig } from '@/services/api';

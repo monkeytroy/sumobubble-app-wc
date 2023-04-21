@@ -16,11 +16,12 @@
         style="max-height: 90vh !important; min-height: 400px !important;">
 
         <div class="rounded-t-3xl 
-          bg-skin-primary bg-opacity-40 h-full
+          bg-skin-primary brightness-105 h-full
           text-2xl font-bold select-none">
-          <div class="flex justify-between items-center uppercase p-4 text-gray-800">
+          <div class="flex justify-between items-center uppercase p-4 "
+            :class="getTextColorByBrightness(config?.customer?.theme.primary)">
             {{ config?.customer?.title || 'Hello there'}}
-            <XCircleIcon class="w-6 h-6 cursor-pointer hover:text-gray-600" 
+            <XCircleIcon class="w-6 h-6 cursor-pointer hover:opacity-70" 
               @click="close">
             </XCircleIcon>
           </div>
@@ -38,10 +39,10 @@
           </div>
         </div>
 
-        <div class="rounded-b-3xl bg-skin-primary bg-opacity-20 h-full
+        <div class="rounded-b-3xl bg-gray-200 h-full
           text-2xs font-semibold select-none">
 
-          <div class="flex flex-wrap justify-evenly gap-2 uppercase p-2 cursor-pointer">
+          <div class="flex flex-wrap justify-evenly gap-2 uppercase p-2">
 
             <LowerNavButton @click="page='home'" text="Back"
               v-if="page != 'home'">
@@ -83,7 +84,7 @@
 
 <script lang="ts" setup>
 
-  import { ref, defineProps, provide } from 'vue';
+  import { ref, defineProps, provide, computed } from 'vue';
   import SummaryPanel from '@/components/SummaryPanel.vue';
   import SpecialPanel from '@/components/SpecialPanel.vue';
   import ContactPanel from '@/components/ContactPanel.vue';
@@ -93,13 +94,13 @@
   import FunnyPanel from '@/components/FunnyPanel.vue';
   import { ChevronLeftIcon, XCircleIcon } from '@heroicons/vue/20/solid';
   import { track } from '@/services/metrics';
+  import tinycolor from "tinycolor2";
   import { UsersIcon, FaceSmileIcon, BookOpenIcon, StarIcon, TvIcon } 
     from '@heroicons/vue/24/outline';
-
+  import { getTextColorByBrightness } from '@/services/theme';
   import LowerNavButton from './LowerNavButton.vue';
 
   const props = defineProps(['config']);
-
   const open = ref(true);
 
   const page = ref('home');

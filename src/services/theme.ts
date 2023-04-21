@@ -1,5 +1,7 @@
+import tinycolor from 'tinycolor2';
+import { ref } from 'vue';
 
-export const getRGBColor = (hex, type) => {
+export const getRGBColor = (hex: string, type: string) => {
   let color = hex.replace(/#/g, "")
   // rgb values
   var r = parseInt(color.substr(0, 2), 16)
@@ -12,7 +14,7 @@ export const getRGBColor = (hex, type) => {
   return `${ctype}: ${crgb}`;
 }
 
-export const getAccessibleColor = (hex) => {
+export const getAccessibleColor = (hex: string) => {
   let color = hex.replace(/#/g, "")
   // rgb values
   var r = parseInt(color.substr(0, 2), 16)
@@ -21,3 +23,15 @@ export const getAccessibleColor = (hex) => {
   var yiq = (r * 299 + g * 587 + b * 114) / 1000
   return yiq >= 128 ? "#000000" : "#FFFFFF"
 }
+
+export const getTextColorByBrightness = ref((color: string) => {
+  if (color) {
+    const tc = tinycolor(color);
+    const brit = tc.getBrightness();
+    if (brit < 125) {
+      return 'text-gray-300';
+    } else {
+      return 'text-gray-800';
+    }
+  }
+});

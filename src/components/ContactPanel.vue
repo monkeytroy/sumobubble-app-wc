@@ -99,11 +99,12 @@
 
         <button type="submit" 
           class="rounded-md grow mr-4
-          bg-skin-primary hover:bg-opacity-80 px-3.5 py-2.5 
-          text-gray-900 text-center text-sm font-semibold shadow-sm
+          bg-skin-primary opacity-90 hover:bg-opacity-80 px-3.5 py-2.5 
+          text-center text-sm font-semibold shadow-sm
           focus-visible:outline focus-visible:outline-2 
           focus-visible:outline-offset-2 
           focus-visible:outline-skin-primary"
+          :class="getTextColorByBrightness(config?.customer?.theme.primary)"
           >
           Send
         </button>
@@ -123,6 +124,7 @@
 
   import { ref, defineProps, computed, onMounted } from 'vue';
   import { sendContact } from '@/services/api';
+  import { getTextColorByBrightness } from '@/services/theme';
 
   const CAPTCHA_KEY = '6LdHNPIkAAAAAHi7HsTDq-RFRKGFMwt6ZOWSFEGn';
   const props = defineProps(['config']);
@@ -155,6 +157,8 @@
   onMounted(async () => {
     await setupRecaptcha();
   });
+
+  
 
   const submitClick = async (e: Event) => {
 
