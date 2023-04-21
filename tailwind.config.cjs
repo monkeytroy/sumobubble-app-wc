@@ -17,7 +17,9 @@ module.exports = {
   theme: {
     extend: {
       // if we find base font is an issue on many sites.. static?
-      // fontSize: {
+      fontSize: {
+        '2xs': '.70rem'
+      },
       //   sm: '14px',
       //   base: '16px',
       //   xl: '20px',

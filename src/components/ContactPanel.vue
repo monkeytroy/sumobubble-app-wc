@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showing">
+  <div>
 
     <p v-if="content" class="text-gray-600 select-none text-xl mb-3">
       {{ content }}
@@ -123,10 +123,9 @@
 
   import { ref, defineProps, computed, onMounted } from 'vue';
   import { sendContact } from '@/services/api';
-  import AccordianContent from '@/components/AccordionContent.vue';
 
   const CAPTCHA_KEY = '6LdHNPIkAAAAAHi7HsTDq-RFRKGFMwt6ZOWSFEGn';
-  const props = defineProps(['config', 'showing']);
+  const props = defineProps(['config']);
   const content = computed(() => props.config?.sections?.contact?.content || '');
 
   const nameInput = ref();

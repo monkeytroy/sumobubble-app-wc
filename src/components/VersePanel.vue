@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showing">
+  <div>
     <div v-if="verse.props.verseRef" class="text-xl font-bold text-gray-800 flex gap-2 items-center relative">
       {{ verse.props.verseRef }}
       <div v-if="verse.props?.copyright" class="font-normal text-sm cursor-pointer"
@@ -26,7 +26,7 @@
   import { computed, defineProps, ref } from 'vue';
   import Markdown from '@/components/Markdown.vue';
   
-  const props = defineProps(['config', 'showing']);
+  const props = defineProps(['config']);
   const showCopyright = ref(false);
 
   const verse = computed(() => props?.config?.sections?.verse || {});

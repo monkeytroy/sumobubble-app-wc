@@ -1,11 +1,11 @@
 <template>
   <div class="group cursor-pointer 
     hover:underline hover:text-skin-primary
-      flex flex-col gap-1 items-center text-gray-500" 
+      flex flex-col gap-0 items-center text-gray-500" 
       @click="emit('click')">
 
     <div class="p-1 bg-transparent border-transparent rounded-full
-      border-2 group-hover:border-skin-primary">
+      border-2 group-hover:border-skin-primary/60">
       <slot></slot>
     </div>
     <span class="">{{text}}</span>

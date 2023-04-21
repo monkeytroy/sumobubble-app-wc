@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showing">
+  <div>
 
     <p v-if="content" class="text-gray-600 select-none text-xl mb-3">
       {{ content }}
@@ -19,7 +19,7 @@
 
   import { computed, defineProps } from 'vue';
 
-  const props = defineProps(['config', 'showing']);
+  const props = defineProps(['config']);
   const spotlight = computed(() => props?.config?.sections.spotlight);
   const content = computed(() => props.config?.sections?.spotlight?.content || '');
 

@@ -1,10 +1,10 @@
 <template>
-  <div v-if="showing" class="select-none">
+  <div class="select-none">
     <div v-for="(value, index) in funny.urls">
       <img :key="index" :src="value"/>
     </div>
 
-    <div v-if="lines?.length > 0 && showing">
+    <div v-if="lines?.length > 0">
       <div ref="listContainRef">
         <div class="delay-0 delay-2000 delay-4000 delay-6000 delay-8000"></div>
         <div v-for="(value, index) in lines" :key="value">
@@ -22,7 +22,7 @@
   import { computed, defineProps, nextTick, onMounted, ref, watch } from 'vue';
   import Markdown from '@/components/Markdown.vue'
   
-  const props = defineProps(['config', 'showing']);
+  const props = defineProps(['config']);
 
   const funny = computed<IBeaconSection>(() => {
     return props.config?.sections?.funny;
@@ -46,7 +46,6 @@
   });
 
   const setupTransClass = () => {
-    console.log('hi');
     transClasses.value = [];
     let newTransClasses: string[] = [];
     const len = lines.value?.length || 0;

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showing">
+  <div>
     <p v-if="content" class="text-gray-600 select-none text-xl mb-3">
       {{ content }}
     </p>
@@ -95,7 +95,6 @@
 
   import { ref, defineProps, computed, onMounted } from 'vue';
   import { sendContact } from '@/services/api';
-  import AccordianContent from '@/components/AccordionContent.vue';
   import PrayerContentCatSelect from './CatSelect.vue';
 
   interface IContactCategory {
@@ -104,7 +103,7 @@
   }
 
   const CAPTCHA_KEY = '6LdHNPIkAAAAAHi7HsTDq-RFRKGFMwt6ZOWSFEGn';
-  const props = defineProps(['config', 'showing']);
+  const props = defineProps(['config']);
   const content = computed(() => props.config?.sections?.prayer?.content || '');
 
   const categories = computed(() => {

@@ -3,9 +3,9 @@
     <div class="fixed bottom-6 right-6 z-40 select-none">
       <img src="../assets/i-icon.png" 
         class="w-12 h-12 select-none
-        cursor-pointer shadow-sm
-        hover:opacity-80 hover:shadow-md
-        bg-white rounded-full"
+          cursor-pointer shadow-sm
+          hover:opacity-80 hover:shadow-md
+          bg-white rounded-full"
         @click="onClick"/>
     </div>
     <div class="fixed bottom-6 right-0 sm:right-0 z-999 max-w-full sm:max-w-md w-full" 
@@ -27,67 +27,50 @@
         </div>
 
         <div class="p-2 grow rounded-b-3xl overflow-hidden flex flex-col">
-
-          <div class="overflow-y-auto p-2 grow" ref="scrollContainer">
-
-            <div v-if="page=='home'" class="flex flex-col gap-4">
-              <SummaryPanel :config="config"></SummaryPanel>
-              <SpecialPanel :config="config"></SpecialPanel>             
-            </div>
-
-            <div v-else class="flex flex-col">
-
-              <ContactPanel :config="config" :showing="page=='contact'"></ContactPanel>
-                
-              <PrayerPanel :config="config" :showing="page=='prayer'"></PrayerPanel>
-              
-              <VersePanel :config="config" :showing="page=='verse'"></VersePanel>
-              
-              <SpotlightPanel :config="config" :showing="page=='spotlight'"></SpotlightPanel>
-              
-              <FunnyPanel :config="config" :showing="page=='funny'"></FunnyPanel>
-
-            </div>
+          <div class="overflow-y-auto p-2 grow flex flex-col gap-4" ref="scrollContainer">
+            <SummaryPanel :config="config" v-if="page=='home'" ></SummaryPanel>
+            <SpecialPanel :config="config" v-if="page=='home'" ></SpecialPanel>             
+            <ContactPanel :config="config" v-if="page=='contact'"></ContactPanel>
+            <PrayerPanel :config="config" v-if="page=='prayer'"></PrayerPanel>
+            <VersePanel :config="config" v-if="page=='verse'"></VersePanel>
+            <SpotlightPanel :config="config" v-if="page=='spotlight'"></SpotlightPanel>
+            <FunnyPanel :config="config" v-if="page=='funny'"></FunnyPanel>
           </div>
-
         </div>
 
         <div class="rounded-b-3xl bg-skin-primary bg-opacity-20 h-full
-          text-sm font-semibold select-none">
+          text-2xs font-semibold select-none">
 
-          <div class="flex flex-wrap justify-evenly gap-2
-            uppercase p-4 cursor-pointer">
+          <div class="flex flex-wrap justify-evenly gap-2 uppercase p-2 cursor-pointer">
 
-            <div v-if="page != 'home'" 
-              class="flex items-center hover:underline text-gray-500 hover:text-skin-primary"
-              @click="page = 'home'">
-              <ChevronLeftIcon class="w-6 h-6"></ChevronLeftIcon>
-              Back
-            </div>
+            <LowerNavButton @click="page='home'" text="Back"
+              v-if="page != 'home'">
+              <ChevronLeftIcon class="h-5 w-5"/>
+            </LowerNavButton>
 
             <LowerNavButton @click="page='contact'" text="Contact"
               v-if="page == 'home' && config?.sections?.contact?.enabled">
-              <UsersIcon class="h-6 w-6"/>
+              <UsersIcon class="h-5 w-5"/>
             </LowerNavButton>
 
             <LowerNavButton @click="page='prayer'" text="Prayer"
               v-if="page == 'home' && config?.sections?.prayer?.enabled">
-              <StarIcon class="h-6 w-6"/>
+              <StarIcon class="h-5 w-5"/>
             </LowerNavButton>
 
             <LowerNavButton @click="page='verse'" text="Verse"
               v-if="page == 'home' && config?.sections?.verse?.enabled">
-              <BookOpenIcon class="h-6 w-6"/>
+              <BookOpenIcon class="h-5 w-5"/>
             </LowerNavButton>
 
             <LowerNavButton @click="page='spotlight'" text="Spotlight"
               v-if="page == 'home' && config?.sections?.spotlight?.enabled">
-              <TvIcon class="h-6 w-6"/>
+              <TvIcon class="h-5 w-5"/>
             </LowerNavButton>
 
             <LowerNavButton @click="page='funny'" text="Funny"
               v-if="page == 'home' && config?.sections?.funny?.enabled">
-              <FaceSmileIcon class="h-6 w-6"/>
+              <FaceSmileIcon class="h-5 w-5"/>
             </LowerNavButton>
 
           </div>
