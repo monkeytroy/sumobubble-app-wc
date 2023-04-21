@@ -52,38 +52,43 @@
 
         </div>
 
-        <div class="rounded-b-3xl bg-skin-primary bg-opacity-40 h-full
+        <div class="rounded-b-3xl bg-skin-primary bg-opacity-20 h-full
           text-sm font-semibold select-none">
-          <div class="flex items-center uppercase p-4 text-gray-800 cursor-pointer">
 
-            <div v-if="page != 'home'" class="flex items-center hover:underline"
+          <div class="flex flex-wrap justify-evenly gap-2
+            uppercase p-4 cursor-pointer">
+
+            <div v-if="page != 'home'" 
+              class="flex items-center hover:underline text-gray-500 hover:text-skin-primary"
               @click="page = 'home'">
               <ChevronLeftIcon class="w-6 h-6"></ChevronLeftIcon>
               Back
             </div>
 
-            <div v-else class="flex flex-wrap gap-4 select-none">
-              <div class="cursor-pointer hover:underline" 
-                v-if="config?.sections?.contact?.enabled"
-                @click="page='contact'">Contact
-              </div>
-              <div class="cursor-pointer hover:underline" 
-                v-if="config?.sections?.prayer?.enabled"
-                @click="page='prayer'">Prayer
-              </div>
-              <div class="cursor-pointer hover:underline" 
-                v-if="config?.sections?.verse?.enabled"
-                @click="page='verse'">Daily Verse
-              </div>
-              <div class="cursor-pointer hover:underline" 
-                v-if="config?.sections?.spotlight?.enabled"
-                @click="page='spotlight'">Video Spotlight
-              </div>
-              <div class="cursor-pointer hover:underline" 
-                v-if="config?.sections?.funny?.enabled"
-                @click="page='funny'">Funny
-              </div>
-            </div>
+            <LowerNavButton @click="page='contact'" text="Contact"
+              v-if="page == 'home' && config?.sections?.contact?.enabled">
+              <UsersIcon class="h-6 w-6"/>
+            </LowerNavButton>
+
+            <LowerNavButton @click="page='prayer'" text="Prayer"
+              v-if="page == 'home' && config?.sections?.prayer?.enabled">
+              <StarIcon class="h-6 w-6"/>
+            </LowerNavButton>
+
+            <LowerNavButton @click="page='verse'" text="Verse"
+              v-if="page == 'home' && config?.sections?.verse?.enabled">
+              <BookOpenIcon class="h-6 w-6"/>
+            </LowerNavButton>
+
+            <LowerNavButton @click="page='spotlight'" text="Spotlight"
+              v-if="page == 'home' && config?.sections?.spotlight?.enabled">
+              <TvIcon class="h-6 w-6"/>
+            </LowerNavButton>
+
+            <LowerNavButton @click="page='funny'" text="Funny"
+              v-if="page == 'home' && config?.sections?.funny?.enabled">
+              <FaceSmileIcon class="h-6 w-6"/>
+            </LowerNavButton>
 
           </div>
         </div>
@@ -105,10 +110,14 @@
   import FunnyPanel from '@/components/FunnyPanel.vue';
   import { ChevronLeftIcon, XCircleIcon } from '@heroicons/vue/20/solid';
   import { track } from '@/services/metrics';
+  import { UsersIcon, FaceSmileIcon, BookOpenIcon, StarIcon, TvIcon } 
+    from '@heroicons/vue/24/outline';
+
+  import LowerNavButton from './LowerNavButton.vue';
 
   const props = defineProps(['config']);
 
-  const open = ref(false);
+  const open = ref(true);
 
   const page = ref('home');
 
