@@ -24,7 +24,7 @@
   
   const props = defineProps(['config']);
 
-  const funny = computed<IBeaconSection>(() => {
+  const funny = computed<ISiteSection>(() => {
     return props.config?.sections?.funny;
   });
 

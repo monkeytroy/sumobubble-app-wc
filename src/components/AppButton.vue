@@ -129,7 +129,7 @@
   const onClick = () => {
     
     // event track
-    track('Beacon Opened');
+    track('InfoChat Opened');
 
     open.value = !open.value;
   }

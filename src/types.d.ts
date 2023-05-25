@@ -5,7 +5,7 @@ interface Window {
   grecaptcha: any;
 }
 
-interface IBeaconSection {
+interface ISiteSection {
   title?: string;
   enabled: boolean;
   content: string;
