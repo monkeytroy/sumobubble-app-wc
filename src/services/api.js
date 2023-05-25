@@ -3,16 +3,16 @@ let config = {};
 let serviceBase = '';
 
 /**
- * Read the config by getting the script path as the service base url.
+ * Read the site config by getting the script path as the service base url.
  * Use this for api calls inc getting the cust config.
  * @param {} customer 
  * @returns 
  */
-export const getConfig = async (customer) => {
+export const getSiteConfig = async (siteId) => {
 
-  const FAIL = 'Could not load the Beacon App. Check customer config.';
+  const FAIL = 'Could not load the App. Check customer config.';
   try {
-    const src = document.querySelector('#beacon-app-scriptastic')?.src;
+    const src = document.querySelector('#infochat-app-scriptastic')?.src;
     serviceBase = src.match(/http[s]?:\/\/.+?\//gm)[0];
 
     // load from local server in dev mode. 
@@ -20,7 +20,7 @@ export const getConfig = async (customer) => {
       serviceBase = 'http://localhost:3000/';
     }
 
-    const res = await fetch(`${serviceBase}api/config/${customer}`);
+    const res = await fetch(`${serviceBase}api/site/${siteId}`);
     if (res.status === 200) {
       const resJson = await res.json();
       config = resJson.data;

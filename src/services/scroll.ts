@@ -1,11 +1,11 @@
 
-export const scrollContent = (scrollItem: string, panelsRefs: any) => {
+export const scrollContent = (panelsRefItem: string, panelsRefs: any) => {
 
-  //console.log(scrollItem);
-  //console.log(panelsRefs.spotlightPanelRef.value);
+  //console.log(panelsRefItem, panelsRefs);
+  //console.log(panelsRefs[panelsRefItem].value);
 
-  const itemHeight = panelsRefs[scrollItem].value.offsetHeight;
-  const itemOffsetTop = panelsRefs[scrollItem].value.offsetTop;
+  const itemHeight = panelsRefs[panelsRefItem].value.offsetHeight;
+  const itemOffsetTop = panelsRefs[panelsRefItem].value.offsetTop;
   const scrollContentOffsetHeight = panelsRefs.scrollContainer.value.offsetHeight;
   const scrollContentOffsetTop = panelsRefs.scrollContainer.value.offsetTop;
 
@@ -14,7 +14,7 @@ export const scrollContent = (scrollItem: string, panelsRefs: any) => {
   // console.log(`scrollContentOffsetHeight ${scrollContentOffsetHeight}`);
   // console.log(`scrollContentOffsetTop ${scrollContentOffsetTop}`);
 
-  const scrollTop  = (itemOffsetTop + itemHeight) - (scrollContentOffsetHeight + scrollContentOffsetTop);
+  const scrollTop  = 15 + (itemOffsetTop + itemHeight) - (scrollContentOffsetHeight + scrollContentOffsetTop);
 
   //console.log(`scrollTop ${scrollTop}`);
 

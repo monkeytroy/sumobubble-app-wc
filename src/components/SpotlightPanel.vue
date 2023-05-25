@@ -5,7 +5,7 @@
       {{ content }}
     </p>
         
-    <iframe :src="spotlight.urls[0]"
+    <iframe :src="spotlight?.urls[0]"
       frameborder="0" 
       class="w-full h-48 mb-8"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 

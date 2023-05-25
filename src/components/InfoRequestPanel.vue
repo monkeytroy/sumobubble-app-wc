@@ -4,7 +4,7 @@
       {{ content }}
     </p>
 
-    <form ref="prayerFormRef" @submit.prevent="submitClick" class="mx-auto text-xl">
+    <form ref="formRef" @submit.prevent="submitClick" class="mx-auto text-xl">
       <div class="grid grid-cols-1 gap-y-2 gap-x-8 sm:grid-cols-2">
         <div class="col-span-2">
           <label for="full-name" 
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="col-span-2">
-          <label for="message" class="block text-sm font-semibold leading-6 text-gray-900 select-none">Prayer Request</label>
+          <label for="message" class="block text-sm font-semibold leading-6 text-gray-900 select-none">Request</label>
           <div class="mt-1">
             <textarea name="message" id="message" rows="3" minlength="4" 
               ref="messageInputRef" v-model="messageInput" required
@@ -51,9 +51,9 @@
           </div>
         </div>
 
-        <PrayerContentCatSelect :categories="categories" @selected-cateogry="onSelectedCategory"
+        <CatSelect :categories="categories" @selected-cateogry="onSelectedCategory"
           v-if="categories.length > 1">
-        </PrayerContentCatSelect>
+        </CatSelect>
 
       </div>
       <div class="mt-4">
@@ -95,7 +95,7 @@
 
   import { ref, defineProps, computed, onMounted } from 'vue';
   import { sendContact } from '@/services/api';
-  import PrayerContentCatSelect from './CatSelect.vue';
+  import CatSelect from './CatSelect.vue';
   import { getTextColorByBrightness } from '@/services/theme';
 
   interface IContactCategory {
@@ -105,15 +105,16 @@
 
   const CAPTCHA_KEY = '6LdHNPIkAAAAAHi7HsTDq-RFRKGFMwt6ZOWSFEGn';
   const props = defineProps(['config']);
-  const content = computed(() => props.config?.sections?.prayer?.content || '');
+  const section = props.config?.sections?.info;
+  const content = computed(() => section?.content || '');
 
   const categories = computed(() => {
     
-    const cats: Array<IContactCategory> = props.config?.sections?.prayer?.props?.categories || [];
+    const cats: Array<IContactCategory> = section?.props?.categories || [];
     return [
       {
         title: 'General',
-        email: props.config?.sections?.prayer?.props?.email
+        email: section?.props?.email
       },
       ...cats
     ]
@@ -122,7 +123,7 @@
   const nameInput = ref();
   const emailInput = ref();
   const messageInput = ref();
-  const prayerFormRef = ref();
+  const formRef = ref();
   const messageInputRef = ref();
   const submitSuccess = ref(false);
   const submitFail = ref(false);
@@ -157,7 +158,7 @@
     submitFail.value = false;
 
     const success = await sendContact({
-      section: 'prayer',
+      section: 'info',
       category: selectedCategory.value,
       email: emailInput.value,
       name: nameInput.value,      
@@ -170,7 +171,7 @@
       emailInput.value = '';
       nameInput.value = '';
       messageInput.value = '';
-      prayerFormRef.value.reset();
+      formRef.value.reset();
 
       setTimeout(() => {
         submitSuccess.value = false;

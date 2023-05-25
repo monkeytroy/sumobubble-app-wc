@@ -1,15 +1,15 @@
 <template>
-    <BeaconButton :config="config" class="font-sans text-left" 
+    <AppButton :config="config" class="font-sans text-left" 
       v-if="config"
       :style="cssRootString">
-    </BeaconButton>
+    </AppButton>
 </template>
 
 <script lang="ts" setup>
 
   import { ref, defineProps } from 'vue';
-  import BeaconButton from '@/components/BeaconButton.vue'
-  import { getConfig } from '@/services/api';
+  import AppButton from '@/components/AppButton.vue'
+  import { getSiteConfig } from '@/services/api';
   import { getRGBColor, getAccessibleColor } from '@/services/theme';
   import { metricsInit, track } from '@/services/metrics';
 
@@ -22,8 +22,8 @@
   const cssRootString = ref('--color-primary: 200 200 250');
 
   const init = async () => {
-    const res = await getConfig(props.customer);
-    if (res.success && res.data) {
+    const res = await getSiteConfig(props.customer);
+    if (res?.success && res?.data) {
       config.value = res.data;
 
       const customerId = config.value.customerId;
@@ -32,7 +32,7 @@
       track('Config Loaded');
 
       // event log config loaded.
-      const primaryColorConfig = config.value.customer?.theme?.primary;
+      const primaryColorConfig = config.value.customer?.theme?.primary || '#aaaaff';
       if (primaryColorConfig) { 
         const primaryColor = getRGBColor(primaryColorConfig, "primary");
         const a11yColor = getRGBColor(getAccessibleColor(primaryColorConfig), "a11y");

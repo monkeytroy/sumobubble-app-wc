@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <p v-if="content" class="text-gray-600 select-none text-xl mb-3">
       {{ content }}
     </p>

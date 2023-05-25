@@ -20,8 +20,8 @@ export default defineConfig({
     lib: {
       formats: ['es', 'cjs'],
       entry: './src/main.js',
-      name: 'beacon-app',
-      fileName: 'beacon-app'
+      name: 'infochat-app',
+      fileName: 'infochat-app'
     }
   },
   define: {

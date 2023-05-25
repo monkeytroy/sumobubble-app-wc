@@ -32,7 +32,7 @@
             <SummaryPanel :config="config" v-if="page=='home'" ></SummaryPanel>
             <SpecialPanel :config="config" v-if="page=='home'" ></SpecialPanel>             
             <ContactPanel :config="config" v-if="page=='contact'"></ContactPanel>
-            <PrayerPanel :config="config" v-if="page=='prayer'"></PrayerPanel>
+            <InfoRequestPanel :config="config" v-if="page=='info'"></InfoRequestPanel>
             <VersePanel :config="config" v-if="page=='verse'"></VersePanel>
             <SpotlightPanel :config="config" v-if="page=='spotlight'"></SpotlightPanel>
             <FunnyPanel :config="config" v-if="page=='funny'"></FunnyPanel>
@@ -54,9 +54,10 @@
               <UsersIcon class="h-6 w-6"/>
             </LowerNavButton>
 
-            <LowerNavButton @click="page='prayer'" text="Request"
+            <LowerNavButton @click="page='info'" text="Request"
               v-if="page == 'home' && config?.sections?.prayer?.enabled">
-              <img class="h-6 w-6" src="@/assets/pray.svg"/>
+              <!--<img class="h-6 w-6" src="@/assets/star.svg"/>-->
+              <StarIcon class="h-6 w-6"></StarIcon>
             </LowerNavButton>
 
             <LowerNavButton @click="page='verse'" text="Verse"
@@ -88,7 +89,7 @@
   import SummaryPanel from '@/components/SummaryPanel.vue';
   import SpecialPanel from '@/components/SpecialPanel.vue';
   import ContactPanel from '@/components/ContactPanel.vue';
-  import PrayerPanel from '@/components/PrayerPanel.vue';
+  import InfoRequestPanel from '@/components/InfoRequestPanel.vue';
   import VersePanel from '@/components/VersePanel.vue';
   import SpotlightPanel from '@/components/SpotlightPanel.vue';
   import FunnyPanel from '@/components/FunnyPanel.vue';
@@ -111,7 +112,7 @@
   const versePanelRef = ref(null);
   const spotlightPanelRef = ref(null);
   const funnyPanelRef = ref(null);
-  const prayerPanelRef = ref(null);
+  const infoRequstPanelRef = ref(null);
 
   const panelRefs = {
     scrollContainer,
@@ -119,7 +120,7 @@
     versePanelRef,
     spotlightPanelRef,
     funnyPanelRef,
-    prayerPanelRef
+    infoRequstPanelRef
   }
 
   provide('openedSection', openedSection);
@@ -130,7 +131,7 @@
   const onClick = () => {
     
     // event track
-    track('Beacon Opened');
+    track('InfoChat Opened');
 
     open.value = !open.value;
   }
