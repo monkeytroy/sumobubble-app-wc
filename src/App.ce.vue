@@ -14,7 +14,7 @@
   import { metricsInit, track } from '@/services/metrics';
 
   const props = defineProps({
-    customer: String,
+    site: String,
   });
   
   // custom dynamic theme for TW
@@ -22,7 +22,7 @@
   const cssRootString = ref('--color-primary: 200 200 250');
 
   const init = async () => {
-    const res = await getSiteConfig(props.customer);
+    const res = await getSiteConfig(props.site);
     if (res) {
       config.value = res;
 
