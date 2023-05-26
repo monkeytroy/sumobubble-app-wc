@@ -10,17 +10,11 @@ let serviceBase = '';
  */
 export const getSiteConfig = async (siteId) => {
 
-  const FAIL = 'Could not load the App. Check customer config.';
+  const FAIL = 'Could not load the site.  Did you publish it??';
   try {
-    const src = document.querySelector('#infochat-app-scriptastic')?.src;
-    serviceBase = src.match(/http[s]?:\/\/.+?\//gm)[0];
+    //const src = document.querySelector('#infochat-app-scriptastic')?.src;
 
-    // load from local server in dev mode. 
-    if (import.meta.env?.MODE === 'development') {
-      serviceBase = 'http://localhost:3000/';
-    }
-
-    const res = await fetch(`${serviceBase}api/site/${siteId}`);
+    const res = await fetch(`https://info-beacon-1.nyc3.digitaloceanspaces.com/sites/${siteId}.json`);
     if (res.status === 200) {
       const resJson = await res.json();
       config = resJson.data;

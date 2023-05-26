@@ -23,8 +23,8 @@
 
   const init = async () => {
     const res = await getSiteConfig(props.customer);
-    if (res?.success && res?.data) {
-      config.value = res.data;
+    if (res) {
+      config.value = res;
 
       const customerId = config.value.customerId;
       await metricsInit(customerId, config.value?.isDev);
@@ -38,7 +38,7 @@
         const a11yColor = getRGBColor(getAccessibleColor(primaryColorConfig), "a11y");
 
         cssRootString.value = `${primaryColor} ${a11yColor}`;
-      } 
+      }
     }
   }
 
