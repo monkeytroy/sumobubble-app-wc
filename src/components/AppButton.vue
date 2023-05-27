@@ -61,7 +61,7 @@
           </div>
           <div v-if="page=='ask'" class="block overflow-hidden relative" style="height: 600px">
             <iframe
-              :src="`https://www.chatbase.co/chatbot-iframe/${config?.sections?.chatbot?.props?.chatbaseId}`"
+              :src="`https://www.chatbase.co/chatbot-iframe/${config?.chatbot?.chatbaseId}`"
               width="100%"
               height="100%"
               frameborder="0">
@@ -70,7 +70,7 @@
         </div>
 
         <div class="rounded-b-3xl bg-gray-200 h-full text-2xs font-semibold select-none"
-          v-if="config?.sections?.chatbot?.enabled && config?.sections?.chatbot?.props?.chatbaseId">
+          v-if="config?.chatbot?.enabled && config?.chatbot?.chatbaseId">
           <div class="flex flex-wrap justify-evenly gap-2 uppercase p-2">
 
             <LowerNavButton @click="page='info'" text="About Us">
