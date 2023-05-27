@@ -1,6 +1,6 @@
 <template>
     <AppButton :config="config" class="font-sans text-left" 
-      v-if="config"
+      v-if="config && (config.summary.enabled || config.chatbot.enabled)"
       :style="cssRootString">
     </AppButton>
 </template>
