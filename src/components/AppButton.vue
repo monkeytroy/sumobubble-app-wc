@@ -28,7 +28,9 @@
         </div>
 
         <div class="px-2 grow rounded-b-3xl overflow-hidden flex flex-col">
-          <div class="px-2 overflow-y-auto grow flex flex-col" ref="scrollContainer" v-if="page=='info'">
+
+          <div class="px-2 overflow-y-auto grow flex flex-col" 
+            ref="scrollContainer" v-if="page==PAGE.INFO">
 
             <div class="mb-4">
               <SummaryPanel :config="config"></SummaryPanel>
@@ -59,7 +61,9 @@
             </AccordionContent>
 
           </div>
-          <div v-if="page=='ask'" class="block overflow-hidden relative" style="height: 600px">
+
+          <div class="block overflow-hidden relative" style="height: 600px;"
+            v-if="page==PAGE.CHAT" >
             <iframe
               :src="`https://www.chatbase.co/chatbot-iframe/${config?.chatbot?.chatbaseId}`"
               width="100%"
@@ -67,17 +71,18 @@
               frameborder="0">
             </iframe>
           </div>
+
         </div>
 
         <div class="rounded-b-3xl bg-gray-200 h-full text-2xs font-semibold select-none"
-          v-if="config?.chatbot?.enabled && config?.chatbot?.chatbaseId">
+          v-if="showMenu">
           <div class="flex flex-wrap justify-evenly gap-2 uppercase p-2">
 
-            <LowerNavButton @click="page='info'" text="About Us">
+            <LowerNavButton @click="page=PAGE.INFO" text="About Us">
               <InformationCircleIcon class="h-8 w-auto"/>
             </LowerNavButton>            
 
-            <LowerNavButton @click="page='ask'" text="Ask Us">
+            <LowerNavButton @click="page=PAGE.CHAT" text="Ask Us">
               <QuestionMarkCircleIcon class="h-8 w-auto"/>
             </LowerNavButton>
 
@@ -91,7 +96,7 @@
 
 <script lang="ts" setup>
 
-  import { ref, defineProps, provide, computed } from 'vue';
+  import { ref, defineProps, provide, computed, onMounted } from 'vue';
   import AccordionContent from '@/components/AccordionContent.vue';
   import SummaryPanel from '@/components/SummaryPanel.vue';
   import SpecialPanel from '@/components/SpecialPanel.vue';
@@ -103,10 +108,13 @@
   import { getTextColorByBrightness } from '@/services/theme';
   import LowerNavButton from './LowerNavButton.vue';
 
+  const enum PAGE {
+    INFO = 'info',
+    CHAT = 'chat'
+  }
+
   const props = defineProps(['config']);
   const open = ref(false);
-
-  const page = ref('info');
 
   const scrollContainer = ref(null);
   const openedSection = ref('');
@@ -114,6 +122,20 @@
   const contactPanelRef = ref(null);
   const spotlightPanelRef = ref(null);
   const infoRequstPanelRef = ref(null);
+
+  const page = ref('');
+
+  onMounted(() => {
+    const info = props.config?.summary.enabled;
+    const chat = props.config?.chatbot.enabled;
+    page.value = (info && chat) ? PAGE.INFO : (info ? PAGE.INFO : PAGE.CHAT);
+  });
+
+  const showMenu = computed(() => {
+    // show the menu if we have both info & chat enabled
+    return props.config?.summary.enabled && 
+      (props.config?.chatbot?.enabled && props.config?.chatbot?.chatbaseId)
+  });
 
   const panelRefs = {
     scrollContainer,
@@ -123,7 +145,7 @@
   }
 
   provide('openedSection', openedSection);
-    // provide to accordion container for scrolling. 
+  // provide to accordion container for scrolling. 
   provide('panelRefs', panelRefs);
 
   const onClick = () => {
