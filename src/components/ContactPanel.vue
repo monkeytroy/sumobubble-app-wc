@@ -42,7 +42,7 @@
           <label for="phone" class="block text-sm font-semibold leading-6 text-gray-900 select-none">Phone</label>
           <div class="mt-1">
             <input type="tel" name="phone" id="phone" autocomplete="tel" 
-              ref="phoneInputRef" v-model="phoneInput" required pattern="^\+?(\d{1})?[- ]?\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$"
+              ref="phoneInputRef" v-model="phoneInput" pattern="^\+?(\d{1})?[- ]?\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$"
               placeholder="xxx-xxx-xxxx"
               class="block w-full py-1.5 px-3.5  
                 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6
@@ -157,12 +157,10 @@
     await setupRecaptcha();
   });
 
-  
-
   const submitClick = async (e: Event) => {
 
     const token = await window.grecaptcha.execute(CAPTCHA_KEY, { action: 'submit' });  
-
+    
     submitSuccess.value = false;
     submitFail.value = false;
 
