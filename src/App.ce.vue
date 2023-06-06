@@ -1,6 +1,6 @@
 <template>
     <AppButton :config="config" class="font-sans text-left" 
-      v-if="config && (config.summary.enabled || config.chatbot.enabled)"
+      v-if="config && (config?.summary?.enabled || (config?.chatbot?.enabled && config?.chatbot?.chatbaseId))"
       :style="cssRootString">
     </AppButton>
 </template>
@@ -15,30 +15,43 @@
 
   const props = defineProps({
     site: String,
+    preview: Boolean,
   });
   
   // custom dynamic theme for TW
-  const config = ref();
+  const config = ref<ISite>();
   const cssRootString = ref('--color-primary: 200 200 250');
 
   const init = async () => {
-    const res = await getSiteConfig(props.site);
-    if (res) {
-      config.value = res;
 
-      const customerId = config.value.customerId;
-      await metricsInit(customerId, config.value?.isDev);
-
-      track('Config Loaded');
-
-      // event log config loaded.
-      const primaryColorConfig = config.value.customer?.theme?.primary || '#aaaaff';
-      if (primaryColorConfig) { 
-        const primaryColor = getRGBColor(primaryColorConfig, "primary");
-        const a11yColor = getRGBColor(getAccessibleColor(primaryColorConfig), "a11y");
-
-        cssRootString.value = `${primaryColor} ${a11yColor}`;
+    if (props.preview) {
+      // setup handler to update config.
+      window.onInfoChatPreviewUpdate = (val: ISite) => {
+        updateConfig(val);
       }
+    }
+
+    const res = await getSiteConfig(props.site, props.preview);
+    if (res) {
+      updateConfig(res);      
+    }
+  }
+  
+  const updateConfig = async (site: ISite) => {
+    config.value = site;
+
+    const customerId = config.value.customerId;
+    await metricsInit(customerId, config.value?.isDev || false);
+
+    track('Config Loaded');
+
+    // event log config loaded.
+    const primaryColorConfig = config.value?.theme?.primary || '#aaaaff';
+    if (primaryColorConfig) { 
+      const primaryColor = getRGBColor(primaryColorConfig, "primary");
+      const a11yColor = getRGBColor(getAccessibleColor(primaryColorConfig), "a11y");
+
+      cssRootString.value = `${primaryColor} ${a11yColor}`;
     }
   }
 

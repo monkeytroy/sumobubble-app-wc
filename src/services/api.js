@@ -7,15 +7,20 @@ let config = {};
  * @param {} customer 
  * @returns 
  */
-export const getSiteConfig = async (siteId) => {
+export const getSiteConfig = async (siteId, preview) => {
 
   const FAIL = 'Could not load the site.  Did you publish it??';
   try {
 
-    const res = await fetch(`https://info-beacon-1.nyc3.digitaloceanspaces.com/sites/${siteId}.json`);
+    let siteUrl = `https://info-beacon-1.nyc3.digitaloceanspaces.com/sites/${siteId}.json`;
+    if (preview) {
+      siteUrl = `/api/site/${siteId}`;
+    }
+
+    const res = await fetch(siteUrl);
     if (res.status === 200) {
       config = await res.json();
-      return config;
+      return preview ? config?.data : config;
     }
   } catch {
     //

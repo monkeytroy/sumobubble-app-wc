@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="fixed bottom-6 right-6 z-40 select-none">
+    
+    <div v-if="config?.button == 'circleRight'"
+      class="fixed bottom-6 right-6 z-40 select-none">
       <img src="../assets/i-icon.png" 
         class="w-12 h-12 select-none
           cursor-pointer shadow-sm
@@ -8,6 +10,21 @@
           bg-white rounded-full"
         @click="onClick"/>
     </div>
+
+    <div v-else
+      class="fixed bottom-64 -right-0 -rotate-90 origin-bottom-right z-40 select-none">
+      <div class="relative select-none px-2 py-1
+          cursor-pointer shadow-md
+          hover:opacity-90 hover:shadow-md
+          rounded-ss-lg rounded-se-lg
+          bg-blue-600 text-white border-2 border-gray-500"
+        @click="onClick">
+        <div class="font-bold">
+          <span v-if="info">Info</span><span v-if="info && chat"> | </span> <span v-if="chat">ChatGPT</span>
+        </div>
+      </div>
+    </div>
+
     <div class="fixed bottom-6 right-0 sm:right-0 z-999 max-w-full sm:max-w-md w-full" 
       :class="open ? 'visible': 'hidden'">
 
@@ -96,7 +113,7 @@
 
 <script lang="ts" setup>
 
-  import { ref, defineProps, provide, computed, onMounted } from 'vue';
+  import { ref, defineProps, provide, computed, onMounted, reactive, watch, watchEffect } from 'vue';
   import AccordionContent from '@/components/AccordionContent.vue';
   import SummaryPanel from '@/components/SummaryPanel.vue';
   import SpecialPanel from '@/components/SpecialPanel.vue';
@@ -124,10 +141,12 @@
   const infoRequstPanelRef = ref(null);
 
   const page = ref('');
+  const info = ref(false);
+  const chat = ref(false);
 
-  onMounted(() => {
-    const info = props.config?.summary.enabled;
-    const chat = props.config?.chatbot.enabled;
+  watchEffect(() => {
+    info.value = !!props.config?.summary.enabled;
+    chat.value = !!props.config?.chatbot.enabled && !!props.config?.chatbot.chatbaseId;
     page.value = (info && chat) ? PAGE.INFO : (info ? PAGE.INFO : PAGE.CHAT);
   });
 
