@@ -71,7 +71,7 @@
 
             <AccordionContent title="Request more information" 
               scrollItem="infoRequstPanelRef"
-              v-if="config?.sections?.info?.enabled">
+              v-if="config?.sections?.inforequest?.enabled">
               <div ref="infoRequstPanelRef">
                 <InfoRequestPanel :config="config"></InfoRequestPanel>
               </div>
