@@ -99,7 +99,7 @@
               <InformationCircleIcon class="h-8 w-auto"/>
             </LowerNavButton>            
 
-            <LowerNavButton @click="page=PAGE.CHAT" text="Ask Us">
+            <LowerNavButton @click="page=PAGE.CHAT" text="Chat (GPT)">
               <QuestionMarkCircleIcon class="h-8 w-auto"/>
             </LowerNavButton>
 
