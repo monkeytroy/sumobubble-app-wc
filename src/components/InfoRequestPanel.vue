@@ -105,7 +105,7 @@
 
   const CAPTCHA_KEY = '6LdHNPIkAAAAAHi7HsTDq-RFRKGFMwt6ZOWSFEGn';
   const props = defineProps(['config']);
-  const section = props.config?.sections?.info;
+  const section = props.config?.sections?.inforequest;
   const content = computed(() => section?.content || '');
 
   const categories = computed(() => {
