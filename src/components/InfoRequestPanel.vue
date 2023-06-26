@@ -159,11 +159,13 @@
 
     const success = await sendContact({
       section: 'info',
-      category: selectedCategory.value,
-      email: emailInput.value,
-      name: nameInput.value,      
-      message: messageInput.value,
-      token
+      token,
+      contactInfo: {
+        category: selectedCategory.value,
+        email: emailInput.value,
+        name: nameInput.value,      
+        message: messageInput.value,
+      }
     });
 
     if (success) {
