@@ -158,7 +158,7 @@
     submitFail.value = false;
 
     const success = await sendContact({
-      section: 'info',
+      section: 'inforequest',
       token,
       contactInfo: {
         category: selectedCategory.value,
