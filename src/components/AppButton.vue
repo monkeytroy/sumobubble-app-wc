@@ -19,7 +19,7 @@
           rounded-ss-lg rounded-se-lg
           bg-blue-600 text-white border-2 border-gray-500"
         @click="onClick">
-        <div class="font-bold">
+        <div class="font-bold text-sm">
           <span v-if="info">Info</span><span v-if="info && chat"> | </span> <span v-if="chat">ChatGPT</span>
         </div>
       </div>
