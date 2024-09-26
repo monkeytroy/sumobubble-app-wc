@@ -20,8 +20,8 @@ export default defineConfig({
     lib: {
       formats: ['es', 'cjs'],
       entry: './src/main.js',
-      name: 'infochat-app',
-      fileName: 'infochat-app'
+      name: 'sumobubble-app',
+      fileName: 'sumobubble-app'
     }
   },
   define: {
