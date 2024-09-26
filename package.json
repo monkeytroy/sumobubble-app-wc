@@ -25,11 +25,11 @@
     "tinycolor2": "^1.6.0",
     "vue": "^3.2.45",
     "vue-html-secure": "^1.0.10",
-    "vue-recaptcha-v3": "^2.0.1"
+    "vue-recaptcha-v3": "^2.0.1",
+    "vite": "^5.4.8",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "vite-plugin-css-injected-by-js": "^3.5.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.1.4",
-    "vite": "^5.4.8",
-    "vite-plugin-css-injected-by-js": "^3.5.1"
   }
 }
