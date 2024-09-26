@@ -21,7 +21,7 @@ export default defineConfig({
       formats: ['es', 'cjs'],
       entry: './src/main.js',
       name: 'sumobubble-app',
-      fileName: 'sumobubble-app'
+      fileName: 'app/sumobubble-app'
     }
   },
   define: {
