@@ -20,7 +20,7 @@ export default defineConfig({
     lib: {
       formats: ['es', 'cjs'],
       entry: './src/main.js',
-      name: 'sumobubble-app',
+      name: 'sumobubble-wc',
       fileName: 'sumobubble'
     }
   },

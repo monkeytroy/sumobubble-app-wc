@@ -9,7 +9,6 @@ let config = {};
  */
 export const getSiteConfig = async (siteId, preview) => {
 
-  const FAIL = 'Could not load the site.  Did you publish it??';
   try {
 
     let siteUrl = `https://info-beacon-1.nyc3.digitaloceanspaces.com/sites/${siteId}.json`;
@@ -25,7 +24,7 @@ export const getSiteConfig = async (siteId, preview) => {
   } catch {
     //
   }
-  console.error(FAIL);
+  console.error('Could not load the site.  Did you publish it??');
   return null;
 }
 

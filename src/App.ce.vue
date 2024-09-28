@@ -23,10 +23,10 @@
   const cssRootString = ref('--color-primary: 200 200 250');
 
   const init = async () => {
-
+    
     if (props.preview) {
       // setup handler to update config.
-      window.onInfoChatPreviewUpdate = (val: ISite) => {
+      window.onPreviewUpdate = (val: ISite) => {
         updateConfig(val);
       }
     }

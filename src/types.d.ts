@@ -3,7 +3,7 @@ declare module "vue-html-secure";
 
 interface Window {
   grecaptcha: any;
-  onInfoChatPreviewUpdate: any;
+  onPreviewUpdate: any;
 }
 
 interface ISite {
