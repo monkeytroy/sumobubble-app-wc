@@ -12,7 +12,7 @@ export const getSiteConfig = async (siteId, preview) => {
   try {
 
     // todo make this configured?
-    let siteUrl = `https://sumobubble-space.nyc3.cdn.digitaloceanspaces.com/sites/${siteId}.json`;
+    let siteUrl = `https://sumobubble-space.nyc3.digitaloceanspaces.com/sites/${siteId}.json`;
     if (preview) {
       siteUrl = `/api/site/${siteId}`;
     }
