@@ -11,7 +11,8 @@ export const getSiteConfig = async (siteId, preview) => {
 
   try {
 
-    let siteUrl = `https://info-beacon-1.nyc3.digitaloceanspaces.com/sites/${siteId}.json`;
+    // todo make this configured?
+    let siteUrl = `https://sumobubble-space.nyc3.cdn.digitaloceanspaces.com/sites/${siteId}.json`;
     if (preview) {
       siteUrl = `/api/site/${siteId}`;
     }
