@@ -5,7 +5,7 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/app',
+  base: '/',
   plugins: [
     vue({
       template: {
@@ -21,7 +21,7 @@ export default defineConfig({
       formats: ['es', 'cjs'],
       entry: './src/main.js',
       name: 'sumobubble-app',
-      fileName: 'app/sumobubble-app'
+      fileName: 'sumobubble'
     }
   },
   define: {
