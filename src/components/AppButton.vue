@@ -170,7 +170,7 @@
   const onClick = () => {
     
     // event track
-    track('InfoChat Opened');
+    track('SumoBubble Opened');
 
     open.value = !open.value;
   }
