@@ -1,4 +1,4 @@
-# Beach App Component
+# SumoBubble Web Component
 
 Install on a page by inserting this code into the page html.
 
