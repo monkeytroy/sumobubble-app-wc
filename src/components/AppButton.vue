@@ -79,13 +79,16 @@
 
           </div>
 
-          <div class="block overflow-hidden relative" style="height: 600px;"
+          <div class="flex flex-col overflow-hidden my-4 grow" 
             v-if="page==PAGE.CHAT" >
-            <iframe
+              <Chat :config="config" class="h-full"></Chat>
+              <!-- 
+              <iframe
               :src="`https://www.chatbase.co/chatbot-iframe/${config?.chatbot?.chatbaseId}`"
               width="100%"
               height="100%"
               frameborder="0">
+              -->
             </iframe>
           </div>
 
@@ -113,18 +116,22 @@
 
 <script lang="ts" setup>
 
-  import { ref, defineProps, provide, computed, onMounted, reactive, watch, watchEffect } from 'vue';
+  import { ref, defineProps, provide, computed, watchEffect } from 'vue';
+  import { InformationCircleIcon, QuestionMarkCircleIcon, XCircleIcon } from '@heroicons/vue/24/outline';
+  import { getTextColorByBrightness } from '@/services/theme';
+
   import AccordionContent from '@/components/AccordionContent.vue';
   import SummaryPanel from '@/components/SummaryPanel.vue';
   import SpecialPanel from '@/components/SpecialPanel.vue';
   import ContactPanel from '@/components/ContactPanel.vue';
   import InfoRequestPanel from '@/components/InfoRequestPanel.vue';
   import SpotlightPanel from '@/components/SpotlightPanel.vue';
-  import { InformationCircleIcon, QuestionMarkCircleIcon, XCircleIcon } from '@heroicons/vue/24/outline';
-  import { track } from '@/services/metrics';
-  import { getTextColorByBrightness } from '@/services/theme';
-  import LowerNavButton from './LowerNavButton.vue';
+  import Chat from '@/components/Chat.vue';
+  import LowerNavButton from '@/components/LowerNavButton.vue';  
 
+  import { track } from '@/services/metrics';
+  
+  
   const enum PAGE {
     INFO = 'info',
     CHAT = 'chat'
