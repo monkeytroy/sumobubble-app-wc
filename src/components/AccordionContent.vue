@@ -4,8 +4,8 @@
       <DisclosureButton class="flex w-full items-start justify-between text-left text-gray-900">
         <span class="text-base font-semibold leading-7">{{title || 'More'}}</span>
         <span class="ml-6 flex h-7 items-center">
-          <PlusSmallIcon v-if="!open" class="h-6 w-6" aria-hidden="true" @click="onClick"/>
-          <MinusSmallIcon v-else class="h-6 w-6" aria-hidden="true" />
+          <PlusIcon v-if="!open" class="h-6 w-6" aria-hidden="true" @click="onClick"/>
+          <MinusIcon v-else class="h-6 w-6" aria-hidden="true" />
         </span>
       </DisclosureButton>
       <DisclosurePanel as="div" className="mt-4">
@@ -23,7 +23,7 @@
   import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
   import { track } from '@/services/metrics';
   import { scrollContent } from '@/services/scroll';
-  import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/vue/24/outline'
+  import { MinusIcon, PlusIcon } from '@heroicons/vue/20/solid';
 
   const props = defineProps(['title', 'defaultOpen', 'config', 'scrollItem']);
   const isOpen = ref(props.defaultOpen);

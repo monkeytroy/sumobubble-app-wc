@@ -20,7 +20,7 @@
           bg-blue-600 text-white border-2 border-gray-500"
         @click="onClick">
         <div class="font-bold text-sm">
-          <span v-if="info">Info</span><span v-if="info && chat"> | </span> <span v-if="chat">ChatGPT</span>
+          <span v-if="info">Info</span><span v-if="info && chat"> | </span> <span v-if="chat">Chat</span>
         </div>
       </div>
     </div>
@@ -82,14 +82,6 @@
           <div class="flex flex-col overflow-hidden my-4 grow" 
             v-if="page==PAGE.CHAT" >
               <Chat :config="config" class="h-full"></Chat>
-              <!-- 
-              <iframe
-              :src="`https://www.chatbase.co/chatbot-iframe/${config?.chatbot?.chatbaseId}`"
-              width="100%"
-              height="100%"
-              frameborder="0">
-              -->
-            </iframe>
           </div>
 
         </div>
@@ -102,7 +94,7 @@
               <InformationCircleIcon class="h-8 w-auto"/>
             </LowerNavButton>            
 
-            <LowerNavButton @click="page=PAGE.CHAT" text="Chat (GPT)">
+            <LowerNavButton @click="page=PAGE.CHAT" text="Ask">
               <QuestionMarkCircleIcon class="h-8 w-auto"/>
             </LowerNavButton>
 
@@ -130,7 +122,6 @@
   import LowerNavButton from '@/components/LowerNavButton.vue';  
 
   import { track } from '@/services/metrics';
-  
   
   const enum PAGE {
     INFO = 'info',
@@ -171,7 +162,7 @@
   }
 
   provide('openedSection', openedSection);
-  // provide to accordion container for scrolling. 
+
   provide('panelRefs', panelRefs);
 
   const onClick = () => {

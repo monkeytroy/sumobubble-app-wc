@@ -103,6 +103,7 @@
     email: string
   }
 
+  // todo options for loading this
   const CAPTCHA_KEY = '6LdHNPIkAAAAAHi7HsTDq-RFRKGFMwt6ZOWSFEGn';
   const props = defineProps(['config']);
   const section = props.config?.sections?.inforequest;

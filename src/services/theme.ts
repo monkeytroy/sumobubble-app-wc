@@ -1,4 +1,3 @@
-import tinycolor from 'tinycolor2';
 import { ref } from 'vue';
 
 export const getRGBColor = (hex: string, type: string) => {

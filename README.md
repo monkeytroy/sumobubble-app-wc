@@ -2,13 +2,18 @@
 
 ## Dev
 
-Of course start with a good old `npm install`
+Of course start with a good old `yarn` to insall dependencies.
 
-Then in one terminal (chat root) do `npm run dev` This will run the html server serving up the full build of the component. 
+Do `yarn dev` to build the WC once and have it served at localhost:3001
 
-In another terminal (chat root as well) do `npm run watch` to watch build the component to refresh on changes. 
+or
 
-Navigate to localhost:5173/app/local.html (or deployed.html for the real one) to test.
+Do 'yarn watch' to build the WC and watch for changes but also have it served at localhost:3001
+
+No auto reload in this configuration. 
+
+Navigate to http://localhost:3001/local.html for a page loading the WC.
+Navitgate to http://localhost:3001/deployed.html for the real deployed prod version one to test.
 
 ## Install
 
@@ -16,8 +21,8 @@ Install on a page by inserting this code into the page html.
 
 ```
 <script type="module" 
-  src="https://sumobubble-app-bukyz.ondigitalocean.app/wc/sumobubble.js" 
-  id="sumobubble-scriptastic">
+  src="https://{url to the hosted app}/wc/sumobubble.js" 
+  id="sumobubble-app-scriptastic">
 </script>
 <sumobubble-wc site="SITE_ID"/>
 ```

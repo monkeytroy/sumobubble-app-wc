@@ -71,7 +71,7 @@ const getServiceBase = () => {
   if ((import.meta as any).env?.MODE === 'development') {
     return 'http://localhost:3000/';
   } else {
-    const src = (document.querySelector('#infochat-app-scriptastic') as any)?.src;
+    const src = (document.querySelector('#sumobubble-app-scriptastic') as any)?.src;
     return src.match(/http[s]?:\/\/.+?\//gm)[0];  
   }
 }

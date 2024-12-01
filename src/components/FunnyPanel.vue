@@ -45,6 +45,7 @@
     setTimeout(() => setupTransClass(), 500);
   });
 
+  // dynamic creation of transition classes to load line by line text. 
   const setupTransClass = () => {
     transClasses.value = [];
     let newTransClasses: string[] = [];

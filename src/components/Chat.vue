@@ -4,10 +4,10 @@
     <div class="grow flex flex-col gap-4 px-4 overflow-y-auto">
 
       <div v-for="(chat, index) in chats" :key="index" 
-      :class="[ chat.user == 'AI' ? 
-            'flex justify-start' : 
-            'flex justify-end' ]">
-        <div class="flex flex-col gap-0.5 py-2 px-4 rounded-md shadow-md w-auto"
+        :class="[ chat.user == 'AI' ? 
+          'flex justify-start' : 
+          'flex justify-end' ]">
+        <div class="flex flex-col gap-0.5 py-2 px-4 rounded-md shadow-md w-auto" 
           :class="[ chat.user == 'AI' ? 
             'bg-green-300' : 
             'bg-blue-200' ]">
