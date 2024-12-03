@@ -144,14 +144,14 @@
 
   watchEffect(() => {
     info.value = !!props.config?.summary.enabled;
-    chat.value = !!props.config?.chatbot.enabled && !!props.config?.chatbot.chatbaseId;
+    chat.value = !!props.config?.chatbot.enabled;
     page.value = (info && chat) ? PAGE.INFO : (info ? PAGE.INFO : PAGE.CHAT);
   });
 
   const showMenu = computed(() => {
     // show the menu if we have both info & chat enabled
     return props.config?.summary.enabled && 
-      (props.config?.chatbot?.enabled && props.config?.chatbot?.chatbaseId)
+      (props.config?.chatbot?.enabled)
   });
 
   const panelRefs = {

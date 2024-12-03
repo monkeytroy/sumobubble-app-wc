@@ -76,15 +76,14 @@ const getServiceBase = () => {
   }
 }
 
-export const sendChat = async (query: string) => {
+export const sendChat = async (siteId: string, query: string) => {
 
   const FAIL = 'Thinking...';
-  const chatId = '1234';
 
   try {
 
     //const res = await fetch(`${getServiceBase()}api/chat/${config._id}/${chatId}`, {
-    const res = await fetch(`${getServiceBase()}api/chat/site1/${chatId}`, {
+    const res = await fetch(`${getServiceBase()}api/chat/${siteId}`, {
       method: 'POST',
       headers: {
         // todo how to protect this?
@@ -97,7 +96,7 @@ export const sendChat = async (query: string) => {
     if (res.status === 200) {
       // return chat.. todo set on state
       const chatResJson = await res.json();
-      console.log(chatResJson);
+
       return chatResJson;
     }
   } catch {

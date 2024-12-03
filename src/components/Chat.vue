@@ -96,10 +96,12 @@
     }
   }
 
-  const sendQuery = async (v: string) => {
+  const sendQuery = async (query: string) => {
+
+    const siteId = props.config?._id;
 
     thinking.value = true;
-    const res = await sendChat(v);
+    const res = await sendChat(siteId, query);
 
     if (res?.success) {
       chats.value.push({
@@ -110,9 +112,7 @@
 
     thinking.value = false;
 
-    console.log(res);
     nextTick(scrollTo);
-
   }
 
   const scrollTo = () => {
