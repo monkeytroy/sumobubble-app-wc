@@ -39,7 +39,7 @@ interface ISiteSection {
   title?: string;
   enabled: boolean;
   content: string;
-  urls?: string[];
+  url: string;
   props?: {
     verseRef?: string;
     autoFill?: boolean;
